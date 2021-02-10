@@ -12,7 +12,7 @@
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu">
                                     <li class="drop"><a href="index.php">Inicio</a></li>
-                                    <li class="drop"><a href="portfolio-card-box-2.html">Productos</a></li>
+                                    <li class="drop"><a href="producto.php">Productos</a></li>
                                      <li><a href="contact.html">Carrito</a></li>
 
                                 </ul>
@@ -21,7 +21,7 @@
                                 <nav id="mobile_dropdown">
                                     <ul>
                                         <li><a href="index.php">Inicio</a></li>
-                                        <li><a href="#">Productos</a></li>
+                                        <li><a href="producto.php">Productos</a></li>
                                         <li><a href="contact.html">Carrito</a></li>
                                     </ul>
                                 </nav>
