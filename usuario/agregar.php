@@ -26,6 +26,8 @@
             '&empresa='.$_COOKIE['id_empresa'].
             '&email='.$_POST["email"].
             '&perfil='.$_POST["perfil"].
+            '&usuario='.$_POST["usuario"].
+            '&clave='.$_POST["clave"].
             '&imagen='.$imagen,
             CURLOPT_HTTPHEADER => array(
               'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
@@ -231,6 +233,18 @@
                                 </select> 
                               <?php } ?>
                             </div>
+                            <div class="col-md-6">
+                              <label for="email">USUARIO</label>
+                              <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="" required>
+                            </div>
+
+                          </div>
+                          <div class="row p-t-0">
+                            <div class="col-md-6">
+                              <label for="email">CLAVE</label>
+                              <input type="password" class="form-control" id="clave" name="clave" placeholder="Clave" value="" required>
+                            </div>
+                            
                           </div>
                           <!--/span-->
                         </div>

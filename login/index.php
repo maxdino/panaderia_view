@@ -1,51 +1,51 @@
 <?php
 if($_SERVER["REQUEST_METHOD"]=="POST"){
+ 
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://localhost/panaderia/index.php/login',
+  CURLOPT_URL => 'http://localhost/panaderia/index.php/usuario',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
   CURLOPT_TIMEOUT => 0,
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => 
-  'usuario='.$_POST["usuario"].
-  '&clave='.$_POST["clave"],
+  CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
-    'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
-    'Content-Type: application/x-www-form-urlencoded'
+    'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg=='
   ),
 ));
+
 $response = curl_exec($curl);
+
 curl_close($curl);
-$data = json_decode($response, true);
-if($data['valida_usuario']==1){
-    session_start();
-foreach($data['usuario'] as $value){
+$usuario = json_decode($response, true); 
+$valida=0;
+foreach ($usuario['Detalles'] as $key => $value) { if ($value['usuario']==$_POST["usuario"]&&$value['clave']==$_POST["clave"]) {
+ 
     setcookie('id_usuario',$value['idEmpleado'],time()+604800,'/');
     setcookie('nombres',$value['nombres'],time()+604800,'/');
     setcookie('apellido_paterno',$value['apellido_paterno'],time()+604800,'/');
     setcookie('apellido_materno',$value['apellido_materno'],time()+604800,'/');
     setcookie('id_empresa',$value['id_empresa'],time()+604800,'/');
     setcookie('perfil_id',$value['perfil_id'],time()+604800,'/');
-    setcookie('llave_secreta',$value['llave_secreta'],time()+604800,'/');
-    setcookie('cliente_id',$value['cliente_id'],time()+604800,'/');
+    setcookie('usuario_admin',$value['usuario'],time()+604800,'/');
+    setcookie('clave_admin',$value['clave'],time()+604800,'/');
     setcookie('email',$value['email'],time()+604800,'/');
     setcookie('imagen',$value['imagen'],time()+604800,'/');
     setcookie('estado',$value['estado'],time()+604800,'/');
+    $valida=1;
 }
-header('Location:../principal/principal.php');    
+    # code...
+}
+if ($valida==1) {
+    header('Location: ../principal/principal.php');  
 }else{
-header('Location:index.php');    
+    header('Location:index.php');  
 }
-
-}
-if (isset($_COOKIE['id_usuario'])) {
-    header('Location:../principal/principal.php'); 
-}
+ 
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en">

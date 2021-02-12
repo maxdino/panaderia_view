@@ -5,8 +5,8 @@
   unset ($_COOKIE ["apellido_materno"]);
   unset ($_COOKIE ["id_empresa"]);
   unset ($_COOKIE ["perfil_id"]);
-  unset ($_COOKIE ["llave_secreta"]);
-  unset ($_COOKIE ["cliente_id"]);
+  unset ($_COOKIE ["clave_admin"]);
+  unset ($_COOKIE ["usuario_admin"]);
   unset ($_COOKIE ["email"]);
   unset ($_COOKIE ["imagen"]);
   unset ($_COOKIE ["estado"]); 
@@ -16,8 +16,8 @@
   setcookie ('apellido_materno', '', time()-604800,'/');
   setcookie ('id_empresa', '', time()-604800,'/');
   setcookie ('perfil_id', '', time()-604800,'/');
-  setcookie ('llave_secreta', '', time()-604800,'/');
-  setcookie ('cliente_id', '', time()-604800,'/');
+  setcookie ('usuario_admin', '', time()-604800,'/');
+  setcookie ('clave_admin', '', time()-604800,'/');
   setcookie ('email', '', time()-604800,'/');
   setcookie ('imagen', '', time()-604800,'/');
   setcookie ('estado', '', time()-604800,'/');   

@@ -54,7 +54,7 @@
                   <div class="card-body" id="cuerpo_pagina"> 
                     <div class="row">
                      <div class="col-md-12">
-                      <a href="agregar.php"><button class="btn  btn-success" >Agregar Modulos</button></a>
+                      <a href="agregar.php"><button class="btn  btn-success" >Agregar Usuario</button></a>
                     </div>
                   </div>
                   <div class="row">
