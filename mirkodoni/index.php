@@ -186,7 +186,7 @@ $producto = json_decode($response, true);
                                                     <h1 style="color: white; text-shadow: black 0.1em 0.1em 0.2em;font-size: 50px;"><?php echo $valuep['descripcion']; ?><span class="text--theme"></span></h1>
                                                      <?php if(isset($_COOKIE['MIRKODONI_EMAIL'])){ ?>
                                                     <div class="slider__btn">
-                                                        <a class="htc_btn" href="cart.html" style="color: white; text-shadow: black 0.1em 0.1em 0.2em; ">Compra ahora</a>
+                                                        <a class="htc_btn" href="agregar_item_carro.php?id=<?php echo $valuep['idProducto']; ?>&&precio=<?php echo $valuep['precio']; ?>"  style="color: white; text-shadow: black 0.1em 0.1em 0.2em; ">Compra ahora</a>
                                                     </div>
                                                 <?php }  ?>
                                                 </div>
@@ -302,9 +302,9 @@ $producto = json_decode($response, true);
                                                     <?php if (isset($_COOKIE['MIRKODONI_EMAIL'])) {  ?>
                                                     <div class="product__hover__info">
                                                         <ul class="product__action">
-                                                            <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                           
                                                             <li><a title="Add TO Cart" href="agregar_item_carro.php?id=<?php echo $valuep1['idProducto']; ?>&&precio=<?php echo $valuep1['precio']; ?>" ><span class="ti-shopping-cart"></span></a></li>
-                                                            <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                                           
                                                         </ul>
                                                     </div>
                                                 <?php }  ?>
@@ -341,9 +341,9 @@ $producto = json_decode($response, true);
                                                     <?php if (isset($_COOKIE['MIRKODONI_EMAIL'])) {  ?>
                                                     <div class="product__hover__info">
                                                         <ul class="product__action">
-                                                            <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                            <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
-                                                            <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                                            
+                                                            <li><a title="Add TO Cart" href="agregar_item_carro.php?id=<?php echo $valuep2['idProducto']; ?>&&precio=<?php echo $valuep2['precio']; ?>" ><span class="ti-shopping-cart"></span></a></li>
+                                                           
                                                         </ul>
                                                     </div>
                                                 <?php }  ?>
@@ -361,7 +361,46 @@ $producto = json_decode($response, true);
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane" id="home3<?php echo $value['id_categoria']; ?>">
+                                <div class="row">
+                                    <div class="product-slider-active owl-carousel">
+                                          <?php  if ($producto['Status']=='200') { 
+                                          foreach ($producto['Detalles3'] as $key => $valuep3) { if (1==$valuep3['id_empresa']) { if($value['id_categoria']==$valuep3['id_categoria']){ ?>
+                                        <div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-12">
+                                            <div class="product">
+                                                <div class="product__inner">
+                                                     <div class="pro__thumb">
+                                                         <?php if (isset($_COOKIE['MIRKODONI_EMAIL'])) {  ?>
+                                                        <a href="#">
+                                                            <?php }  ?>
+                                                            <img style="width: 270px;height: 270px;" src="<?php echo '../librerias/imagen/'.$valuep3['imagen']; ?>" alt="product images">
+                                                             <?php if (isset($_COOKIE['MIRKODONI_EMAIL'])) {  ?>
+                                                        </a>
+                                                        <?php }  ?>
+                                                    </div>
+                                                    <?php if (isset($_COOKIE['MIRKODONI_EMAIL'])) {  ?>
+                                                    <div class="product__hover__info">
+                                                        <ul class="product__action">
+                                                            
+                                                            <li><a title="Add TO Cart" href="agregar_item_carro.php?id=<?php echo $valuep3['idProducto']; ?>&&precio=<?php echo $valuep3['precio']; ?>" ><span class="ti-shopping-cart"></span></a></li>
+                                                           
+                                                        </ul>
+                                                    </div>
+                                                <?php }  ?>
+                                                </div>
+                                                <div class="product__details">
+                                                    <h2><a href="product-details.html"><?php echo $valuep3['descripcion']; ?></a></h2>
+                                                    <ul class="product__price">
+                                                        <li class="new__price"><?php echo 'S/ '.$valuep3['precio']; ?></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <?php }  } } } ?>
  
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -371,115 +410,7 @@ $producto = json_decode($response, true);
 <?php }  }   } ?>
 <!-- End Our Product Area -->
 <!-- Start Blog Area -->
-<section class="htc__blog__area bg__white pb--130">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="section__title section__title--2 text-center">
-                    <h2 class="title__line">Latest News</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod temp incididunt ut labore et dolore magna aliqua. </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="blog__wrap clearfix mt--60 xmt-30">
-                <!-- Start Single Blog -->
-                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                    <div class="blog foo">
-                        <div class="blog__inner">
-                            <div class="blog__thumb">
-                                <a href="blog-details.html">
-                                    <img src="images/blog/blog-img/1.jpg" alt="blog images">
-                                </a>
-                                <div class="blog__post__time">
-                                    <div class="post__time--inner">
-                                        <span class="date">14</span>
-                                        <span class="month">sep</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog__hover__info">
-                                <div class="blog__hover__action">
-                                    <p class="blog__des"><a href="blog-details.html">Lorem ipsum dolor sit consectetu.</a></p>
-                                    <ul class="bl__meta">
-                                        <li>By :<a href="#">Admin</a></li>
-                                        <li>Product</li>
-                                    </ul>
-                                    <div class="blog__btn">
-                                        <a class="read__more__btn" href="blog-details.html">read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Blog -->
-                <!-- Start Single Blog -->
-                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                    <div class="blog foo">
-                        <div class="blog__inner">
-                            <div class="blog__thumb">
-                                <a href="blog-details.html">
-                                    <img src="images/blog/blog-img/2.jpg" alt="blog images">
-                                </a>
-                                <div class="blog__post__time">
-                                    <div class="post__time--inner">
-                                        <span class="date">14</span>
-                                        <span class="month">sep</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog__hover__info">
-                                <div class="blog__hover__action">
-                                    <p class="blog__des"><a href="blog-details.html">Lorem ipsum dolor sit consectetu.</a></p>
-                                    <ul class="bl__meta">
-                                        <li>By :<a href="#">Admin</a></li>
-                                        <li>Product</li>
-                                    </ul>
-                                    <div class="blog__btn">
-                                        <a class="read__more__btn" href="blog-details.html">read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Blog -->
-                <!-- Start Single Blog -->
-                <div class="col-md-4 col-lg-4 hidden-sm col-xs-12">
-                    <div class="blog foo">
-                        <div class="blog__inner">
-                            <div class="blog__thumb">
-                                <a href="blog-details.html">
-                                    <img src="images/blog/blog-img/3.jpg" alt="blog images">
-                                </a>
-                                <div class="blog__post__time">
-                                    <div class="post__time--inner">
-                                        <span class="date">14</span>
-                                        <span class="month">sep</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog__hover__info">
-                                <div class="blog__hover__action">
-                                    <p class="blog__des"><a href="blog-details.html">Lorem ipsum dolor sit consectetu.</a></p>
-                                    <ul class="bl__meta">
-                                        <li>By :<a href="#">Admin</a></li>
-                                        <li>Product</li>
-                                    </ul>
-                                    <div class="blog__btn">
-                                        <a class="read__more__btn" href="blog-details.html">read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Blog -->
-            </div>
-        </div>
-    </div>
-</section>
+ <br><br>
 <!-- End Blog Area -->
 <!-- Start Footer Area -->
  <?php include 'footer.php'; ?>

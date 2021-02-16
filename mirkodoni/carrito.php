@@ -13,7 +13,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
     'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg=='
-  ),
+),
 ));
 
 $response = curl_exec($curl);
@@ -39,6 +39,23 @@ $carrito_cliente = json_decode($response, true);
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
     <?php include '../includes/css_portada.php'; ?>
+    <script src="https://checkout.culqi.com/js/v3"></script>
+    <style type="text/css">
+      
+       .button {
+          background-color: #000;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+
+    </style>
 </head>
 
 <body>
@@ -51,7 +68,7 @@ $carrito_cliente = json_decode($response, true);
         <!-- Start Header Style -->
         <header id="header" class="htc-header header--3 bg__white">
             <!-- Start Mainmenu Area -->
-             <?php include 'navbar.php'; ?>
+            <?php include 'navbar.php'; ?>
             <!-- End Mainmenu Area -->
         </header>
         <!-- End Header Style -->
@@ -154,16 +171,16 @@ $carrito_cliente = json_decode($response, true);
                                   <a class="breadcrumb-item" href="index.php">Inicio</a>
                                   <span class="brd-separetor">/</span>
                                   <span class="breadcrumb-item active">Carrito</span>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Bradcaump area -->
-        <!-- cart-main-area start -->
-        <form>
+                              </nav>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- End Bradcaump area -->
+      <!-- cart-main-area start -->
+      <form>
         <div class="cart-main-area ptb--120 bg__white">
             <div class="container">
                 <div class="row">
@@ -182,27 +199,27 @@ $carrito_cliente = json_decode($response, true);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $suma=0; foreach ($carrito_cliente['Detalles'] as $key => $value) {      ?>
-                                        <tr>
-                                             <td class="product-thumbnail"><input type="hidden" name="producto[]" value="<?php echo $value['idProducto'] ?>"><input type="hidden" name="precio[]" value="<?php echo $value['precio'] ?>"><input type="hidden" name="cantidad[]"  value="<?php echo $value['cantidad'] ?>" id="cantidad<?php echo $value['idProducto'] ?>"><a href="#"><img src="<?php echo '../librerias/imagen/'.$value['imagen']; ?>" alt="product img" /></a></td>
-                                            <td class="product-name"><a href="#"><?php echo $value['descripcion'] ?></a></td>
-                                            <td class="product-price"><span class="amount"><?php echo $value['precio'] ?></span></td>
-                                            <td class="product-quantity"><input type="number" value="<?php echo $value['cantidad'] ?>" /></td>
-                                            <td class="product-subtotal"><?php echo 'S/ '.number_format($value["precio"]* $value['cantidad'] , 2, '.', '') ?></td>
-                                            <td class="product-remove"><a href="eliminar_item_carro.php?id=<?php echo $value['idProducto'] ?>">X</a></td>
-                                        </tr>
-                                    <?php $suma=$suma+($value["precio"]*$value['cantidad']);  }    ?>
-                                      <input type="hidden" name="monto" value="<?php echo $suma ?>">
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row">
+                                        <?php $suma=0; if ($carrito_cliente['Status']=='200') {  foreach ($carrito_cliente['Detalles'] as $key => $value) { ?>
+                                            <tr>
+                                               <td class="product-thumbnail"><input type="hidden" name="producto[]" value="<?php echo $value['idProducto'] ?>"><input type="hidden" id="ucantidad<?php echo (int)($value['idProducto']) ?>" value="<?php echo $value['ucantidad'] ?>"><input type="hidden" name="precio[]" value="<?php echo $value['precio'] ?>" id="precio<?php echo (int)($value['idProducto']) ?>"><input type="hidden"  name="cantidad[]" value="<?php echo $value['cantidad'] ?>" id="cantidad<?php echo (int)($value['idProducto']) ?>" /> <input type="hidden" name="cantidad_maxima" id="cantidad_maxima<?php echo (int)($value['idProducto']) ?>" value="<?php echo $value['cantidad_maxima'] ?>"><input type="hidden" name="importe[]" id="importe_carrito<?php echo (int)($value['idProducto']) ?>" value="<?php echo $value["precio"]* $value['cantidad'] ?>"><a href="#"><img src="<?php echo '../librerias/imagen/'.$value['imagen']; ?>" alt="product img" /></a></td>
+                                               <td class="product-name"><a href="#"><?php echo $value['descripcion'] ?></a></td>
+                                               <td class="product-price"><span class="amount"><?php echo $value['precio'] ?></span></td>
+                                               <td class="product-quantity"><input min="1" max="50" maxlength="2" type="text" class="solo_numero" onchange="validar_maxima_cantidad(<?php echo (int)($value['idProducto']); ?>)"  value="<?php echo $value['cantidad'] ?>" id="cantidad_producto<?php echo (int)($value['idProducto']) ?>" /></td>
+                                               <td class="product-subtotal importe<?php echo (int)($value['idProducto']) ?>"><?php echo 'S/ '.number_format($value["precio"]* $value['cantidad'] , 2, '.', '') ?></td>
+                                               <td class="product-remove"><a href="eliminar_item_carro.php?id=<?php echo $value['idProducto'] ?>">X</a></td>
+                                           </tr>
+                                           <?php $suma=$suma+($value["precio"]*$value['cantidad']);  } }    ?>
+                                           <input type="hidden" name="monto" id="monto" value="<?php echo $suma ?>">
+                                       </tbody>
+                                   </table>
+                               </div>
+                               <div class="row">
                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                     <div class="buttons-cart">
-                                        
+
                                         <a href="producto.php">Continuar Comprando</a>
                                     </div>
- 
+
                                 </div>
                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                     <div class="cart_totals">
@@ -211,19 +228,19 @@ $carrito_cliente = json_decode($response, true);
                                             <tbody>
                                                 <tr class="cart-subtotal">
                                                     <th>Subtotal</th>
-                                                    <td><span class="amount"><?php echo 'S/ '.number_format($suma , 2, '.', ''); ?></span></td>
+                                                    <td><span class="amount monto_nuevo"><?php echo 'S/ '.number_format($suma , 2, '.', ''); ?></span></td>
                                                 </tr>
-                                                 
+
                                                 <tr class="order-total">
                                                     <th>Total</th>
                                                     <td>
-                                                        <strong><span class="amount"><?php echo 'S/ '.number_format($suma , 2, '.', ''); ?></span></strong>
+                                                        <strong><span class="amount monto_nuevo"><?php echo 'S/ '.number_format($suma , 2, '.', ''); ?></span></strong>
                                                     </td>
                                                 </tr>                                           
                                             </tbody>
                                         </table>
                                         <div class="wc-proceed-to-checkout">
-                                            <a href="checkout.html">Proceed to Checkout</a>
+                                            <input type="button"  class="button" id="buyButton" value="Confirmar lista del carrito" >  
                                         </div>
                                     </div>
                                 </div>
@@ -233,17 +250,92 @@ $carrito_cliente = json_decode($response, true);
                 </div>
             </div>
         </div>
-        </form>
-        <!-- cart-main-area end -->
-        <!-- Start Footer Area -->
-        <?php include 'footer.php'; ?>
-        <!-- End Footer Area -->
-    </div>
-    <!-- Body main wrapper end -->
-    <!-- Placed js at the end of the document so the pages load faster -->
+    </form>
+    <!-- cart-main-area end -->
+    <!-- Start Footer Area -->
+    <?php include 'footer.php'; ?>
+    <!-- End Footer Area -->
+</div>
+<!-- Body main wrapper end -->
+<!-- Placed js at the end of the document so the pages load faster -->
 
-    <!-- jquery latest version -->
-    <?php include '../includes/js_portada.php'; ?>
+<!-- jquery latest version -->
+<?php include '../includes/js_portada.php'; ?>
+<script type="text/javascript">
+   function validar_maxima_cantidad(id){
+    cantidad = $('#cantidad_producto'+id).val();
+    maxima =$('#cantidad_maxima'+id).val();
+    ucantidad = $('#ucantidad'+id).val();
+    importe =$('#importe_carrito'+id).val();
+    monto =$('#monto').val();
+    precio =$('#precio'+id).val();
+    nmaxima=Math.floor(parseInt(maxima)/parseInt(ucantidad));
+    if (nmaxima<parseInt(cantidad)) {
+     $('#cantidad_producto'+id).val(nmaxima);
+     cantidad=nmaxima;
+     $('#cantidad'+id).val(nmaxima); 
+ }else{
+    $('#cantidad'+id).val(cantidad); 
+}
+monto = parseFloat(monto)-parseFloat(importe);
+importe = parseFloat(cantidad)*parseFloat(precio);
+$('#importe_carrito'+id).val(importe);
+$('#importe_carrito'+id).val(importe);
+monto_nuevo =  monto+importe;
+$('#monto').val((monto_nuevo).toFixed(2));
+$('.importe'+id).html('S/ '+(importe).toFixed(2));
+$('.monto_nuevo').html('S/ '+(monto_nuevo).toFixed(2));
+
+$.post('actualizar_item_carro.php',{'id':id,'cantidad':cantidad},function(){
+
+})
+
+}
+$('.solo_numero').on('input', function () { 
+  this.value = this.value.replace(/[^0-9]/g,'');
+});
+</script>
+<script>
+    // Configura tu llave pública
+    Culqi.publicKey = 'pk_test_d05dec225486d6e9';
+    // Configura tu Culqi Checkout
+
+
+    // Usa la funcion Culqi.open() en el evento que desees
+    $('#buyButton').on('click', function(e) {
+        // Abre el formulario con las opciones de Culqi.settings
+        monto = $('#monto').val();
+        Culqi.settings({
+            title: 'MIRKODONI',
+            currency: 'PEN',
+            description: 'Producto',
+            amount: monto*100
+        });
+        Culqi.open();
+        e.preventDefault();
+
+    });
+
+    function culqi() {
+        monto = ($('#monto').val()*100);
+  if (Culqi.token) { // ¡Objeto Token creado exitosamente!
+      var token = Culqi.token.id;
+      var email = Culqi.token.email;
+      var data = {monto:monto,token:token,email:email};
+      var url = "proceso.php";
+      $.post(url,data,function(res){
+         window.location.href = "carrito.php";
+       
+      })
+      //En esta linea de codigo debemos enviar el "Culqi.token.id"
+      //hacia tu servidor con Ajax
+  } else { // ¡Hubo algún problema!
+      // Mostramos JSON de objeto error en consola
+      console.log(Culqi.error);
+      alert(Culqi.error.user_message);
+  }
+};
+</script>
 
 </body>
 

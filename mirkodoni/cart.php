@@ -1,5 +1,6 @@
 <?php
-
+if (isset($_COOKIE['MIRKODONI_ID'])) {
+  
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -20,7 +21,7 @@ $response = curl_exec($curl);
 
 curl_close($curl);
 $carrito_clientes = json_decode($response, true);
-
+}
 ?> 
 <div class="shopping__cart">
     <div class="shopping__cart__inner">
@@ -28,7 +29,7 @@ $carrito_clientes = json_decode($response, true);
             <a href="#"><i class="zmdi zmdi-close"></i></a>
         </div>
         <div class="shp__cart__wrap" id="modal_cart">
-            <?php $suma=0; foreach ($carrito_clientes['Detalles'] as $key => $value) {  ?>
+            <?php $suma=0; if (isset($_COOKIE['MIRKODONI_ID'])) {  if ($carrito_cliente['Status']=='200') {  foreach ($carrito_clientes['Detalles'] as $key => $value) {  ?>
 
                 <div class="shp__single__product" id="fil'+elem['Detalles']['idProducto']+'"> 
                     <div class="shp__pro__thumb"> <img src="<?php echo '../librerias/imagen/'.$value['imagen']; ?>" style="width: 60px;height: 60px;" alt="product images"> </div> 
@@ -39,7 +40,7 @@ $carrito_clientes = json_decode($response, true);
                     </div> 
                     <div class="remove__btn"> <a href="eliminar_item_carro.php?id=<?php echo $value['idProducto'] ?>" title="Remove this item"><i class="zmdi zmdi-close"></i></a> </div>
                 </div>
-                <?php $suma=$suma+($value["precio"]*$value['cantidad']); }  ?>
+                <?php $suma=$suma+($value["precio"]*$value['cantidad']); } } }  ?>
             </div>
             <ul class="shoping__total">
                 <li class="subtotal">Subtotal:</li>

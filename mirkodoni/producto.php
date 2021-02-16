@@ -232,7 +232,7 @@ $producto = json_decode($response, true);
                         <div class="product__hover__info">
                             <ul class="product__action">
                                 <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                <li><a title="Add TO Cart" href="agregar_item_carro.php?id=<?php echo $valuep['idProducto']; ?>&&precio=<?php echo $valuep['precio']; ?>" ><span class="ti-shopping-cart"></span></a></li>
                                 <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
                             </ul>
                         </div>

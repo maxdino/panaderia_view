@@ -109,14 +109,10 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="copyright__inner">
                                 <div class="copyright">
-                                    <p>© 2017 <a href="https://freethemescloud.com/">Free themes Cloud</a>
-                                    All Right Reserved.</p>
+                                    <p>© <?php  echo date('Y') ?><a > MIRKODONI</a>
+                                    Todos los derechos reservados.</p>
                                 </div>
-                                <ul class="footer__menu">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="shop.html">Product</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                </ul>
+                                 
                             </div>
                         </div>
                     </div>
