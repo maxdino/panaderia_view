@@ -3,7 +3,7 @@
 $curl = curl_init();
 $id = $_GET["id"];
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://localhost/panaderia/index.php/permisos_modulo/'.$id,
+  CURLOPT_URL => 'http://polvazo.informaticapp.com/permisos_modulo/'.$id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,

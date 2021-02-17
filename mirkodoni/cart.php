@@ -29,7 +29,8 @@ $carrito_clientes = json_decode($response, true);
             <a href="#"><i class="zmdi zmdi-close"></i></a>
         </div>
         <div class="shp__cart__wrap" id="modal_cart">
-            <?php $suma=0; if (isset($_COOKIE['MIRKODONI_ID'])) {  if ($carrito_cliente['Status']=='200') {  foreach ($carrito_clientes['Detalles'] as $key => $value) {  ?>
+
+            <?php    $suma=0; if (isset($_COOKIE['MIRKODONI_ID'])) {  if ($carrito_clientes['Status']=='200') {  foreach ($carrito_clientes['Detalles'] as $key => $value) {  ?>
 
                 <div class="shp__single__product" id="fil'+elem['Detalles']['idProducto']+'"> 
                     <div class="shp__pro__thumb"> <img src="<?php echo '../librerias/imagen/'.$value['imagen']; ?>" style="width: 60px;height: 60px;" alt="product images"> </div> 
