@@ -44,7 +44,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/perfiles',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/perfiles',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -59,10 +59,11 @@
           $response = curl_exec($curl);
           curl_close($curl);
           $perfiles = json_decode($response, true);
+   
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/usuario/'.$_GET['id'],
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/usuario/'.$_GET['id'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -79,6 +80,7 @@
 
           curl_close($curl);
           $listar_usuario = json_decode($response, true);
+
         }
         include '../permisos.php';//modulos del navbar lateral
 

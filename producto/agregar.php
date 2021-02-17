@@ -9,7 +9,7 @@
             move_uploaded_file($_FILES['fileToUpload']['tmp_name'], '../librerias/imagen/'.$imagen);
           }
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/producto',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/producto',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -40,7 +40,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/categoria',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/categoria',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -59,7 +59,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/unidad_medida',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/unidad_medida',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
