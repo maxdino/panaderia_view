@@ -3,7 +3,7 @@
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://localhost/panaderia/index.php/unidad_medida/'.$_GET['id'],
+  CURLOPT_URL => 'http://polvazo.informaticapp.com/unidad_medida/'.$_GET['id'],
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
