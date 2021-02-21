@@ -73,36 +73,40 @@ header('Location: login.php');
     $valida=0;
     foreach ($cliente['Detalles'] as $key => $value) { if($value['id_empresa']==1){ if ($value['email']==$email) {
       $valida=1;
+      if ($value['nombres']=='') {
+        $usuario_nombre='cliente';
+      }else{
+        $usuario_nombre=$value['nombres'];
+      }
       setcookie('MIRKODONI_ID',$value['idCliente'],time()+604800,'/');
-      setcookie('MIRKODONI_CLIENTE_ID',$value['nombres'],time()+604800,'/'); 
+      setcookie('MIRKODONI_CLIENTE_ID',$usuario_nombre,time()+604800,'/'); 
       setcookie('MIRKODONI_EMAIL',$value['email'],time()+604800,'/');
     }
   }
 }
+ 
 if ($valida==0) {
   $curl = curl_init();
 
-  curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://polvazo.informaticapp.com/clientes',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => '
-    email='.$email.
-    '&empresa=1&nombres=&apellido_paterno=&apellido_materno=&direccion=&telefono=&usuario=&password=',
-    CURLOPT_HTTPHEADER => array(
-      'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
-      'Content-Type: application/x-www-form-urlencoded'
-    ),
-  ));
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://polvazo.informaticapp.com/clientes',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => 'nombres=&apellido_paterno=&apellido_materno=&direccion=&telefono=&empresa=1&email='.$email.'&usuario=&password=',
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+    'Content-Type: application/x-www-form-urlencoded'
+  ),
+));
 
-  $response = curl_exec($curl);
+$response = curl_exec($curl);
 
-  curl_close($curl);
+curl_close($curl);
 } 
 
 
