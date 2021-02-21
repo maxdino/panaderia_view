@@ -4,7 +4,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://localhost/panaderia/index.php/clientes',
+    CURLOPT_URL => 'http://polvazo.informaticapp.com/clientes',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -37,9 +37,6 @@ header('Location: login.php');
 
 }else{
 
-
-
-
   include '../librerias/google_api/redirect.php';
 
 // autenticar código de Google OAuth Flow
@@ -56,7 +53,7 @@ header('Location: login.php');
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'http://localhost/panaderia/index.php/clientes',
+      CURLOPT_URL => 'http://polvazo.informaticapp.com/clientes',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -86,7 +83,7 @@ if ($valida==0) {
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://localhost/panaderia/index.php/clientes',
+    CURLOPT_URL => 'http://polvazo.informaticapp.com/clientes',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -117,7 +114,7 @@ if (isset($_COOKIE['MIRKODONI_EMAIL'])) {//para traer datos del cliente
   $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'http://localhost/panaderia/index.php/clientes/'.$_COOKIE['MIRKODONI_ID'],
+      CURLOPT_URL => 'http://polvazo.informaticapp.com/clientes/'.$_COOKIE['MIRKODONI_ID'],
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,

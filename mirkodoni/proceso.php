@@ -33,7 +33,7 @@ $monto = number_format($_POST['monto']/100, 2, '.', '');
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://localhost/panaderia/index.php/ventas',
+  CURLOPT_URL => 'http://polvazo.informaticapp.com/ventas',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
