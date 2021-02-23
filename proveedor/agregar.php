@@ -9,7 +9,7 @@
             move_uploaded_file($_FILES['fileToUpload']['tmp_name'], '../librerias/imagen/'.$imagen);
           }
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/proveedor',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/proveedor',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -41,7 +41,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/perfiles',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/perfiles',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
