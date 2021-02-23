@@ -15,7 +15,7 @@
             <?php include "../includes/css.php"; ?>
         </head>
         <script type="text/javascript">
-            var base_url = "<?php echo 'http://localhost/Panaderia_view/'; ?>";
+            var base_url = "<?php echo 'http://localhost/Panaderia_view'; ?>";
             
         </script>
         <body class="fix-header card-no-border fix-sidebar">
