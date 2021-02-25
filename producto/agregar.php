@@ -175,7 +175,7 @@
                         <center class="m-t-30"> 
                           <div  class="avatar-upload">
                             <div class="avatar-edit">
-                              <input type="file" name="fileToUpload" id="imageUpload" accept="image/*">
+                              <input type="file" required="" name="fileToUpload" id="imageUpload" accept="image/*">
                               <label for="imageUpload"></label>
                             </div>
                             <div class="avatar-preview">
@@ -184,7 +184,7 @@
                             <br><input type="hidden"  name="id" id="id">
                             <div class="row form-group has-success">
                               <label class="form-control-label" for="success">PRODUCTO</label>
-                              <input type="text" class="form-control form-control-success" id="nombre" name="nombre">
+                              <input type="text" required="" class="form-control form-control-success" id="nombre" name="nombre">
                             </div> 
                           </div>  
                         </center>

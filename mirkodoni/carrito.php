@@ -1,5 +1,5 @@
 <?php
-
+if (isset($_COOKIE['MIRKODONI_ID'])) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -20,7 +20,7 @@ $response = curl_exec($curl);
 
 curl_close($curl);
 $carrito_cliente = json_decode($response, true);
-
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -199,7 +199,7 @@ $carrito_cliente = json_decode($response, true);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $suma=0; if ($carrito_cliente['Status']=='200') {  foreach ($carrito_cliente['Detalles'] as $key => $value) { ?>
+                                        <?php $suma=0; if (isset($_COOKIE['MIRKODONI_ID'])) { if ($carrito_cliente['Status']=='200') {  foreach ($carrito_cliente['Detalles'] as $key => $value) { ?>
                                             <tr>
                                                <td class="product-thumbnail"><input type="hidden" name="producto[]" value="<?php echo $value['idProducto'] ?>"><input type="hidden" id="ucantidad<?php echo (int)($value['idProducto']) ?>" value="<?php echo $value['ucantidad'] ?>"><input type="hidden" name="precio[]" value="<?php echo $value['precio'] ?>" id="precio<?php echo (int)($value['idProducto']) ?>"><input type="hidden"  name="cantidad[]" value="<?php echo $value['cantidad'] ?>" id="cantidad<?php echo (int)($value['idProducto']) ?>" /> <input type="hidden" name="cantidad_maxima" id="cantidad_maxima<?php echo (int)($value['idProducto']) ?>" value="<?php echo $value['cantidad_maxima'] ?>"><input type="hidden" name="importe[]" id="importe_carrito<?php echo (int)($value['idProducto']) ?>" value="<?php echo $value["precio"]* $value['cantidad'] ?>"><a href="#"><img src="<?php echo '../librerias/imagen/'.$value['imagen']; ?>" alt="product img" /></a></td>
                                                <td class="product-name"><a href="#"><?php echo $value['descripcion'] ?></a></td>
@@ -208,7 +208,7 @@ $carrito_cliente = json_decode($response, true);
                                                <td class="product-subtotal importe<?php echo (int)($value['idProducto']) ?>"><?php echo 'S/ '.number_format($value["precio"]* $value['cantidad'] , 2, '.', '') ?></td>
                                                <td class="product-remove"><a href="eliminar_item_carro.php?id=<?php echo $value['idProducto'] ?>">X</a></td>
                                            </tr>
-                                           <?php $suma=$suma+($value["precio"]*$value['cantidad']);  } }    ?>
+                                           <?php $suma=$suma+($value["precio"]*$value['cantidad']);  } }  }  ?>
                                            <input type="hidden" name="monto" id="monto" value="<?php echo $suma ?>">
                                        </tbody>
                                    </table>
