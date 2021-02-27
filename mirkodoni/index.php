@@ -310,7 +310,7 @@ $producto = json_decode($response, true);
                                                 <?php }  ?>
                                                 </div>
                                                 <div class="product__details">
-                                                    <h2><a href="product-details.html"><?php echo $valuep1['descripcion']; ?></a></h2>
+                                                    <h2><a href="agregar_item_carro.php?id=<?php echo $valuep1['idProducto']; ?>&&precio=<?php echo $valuep1['precio']; ?>"><?php echo $valuep1['descripcion']; ?></a></h2>
                                                     <ul class="product__price">
                                                         <li class="new__price"><?php echo 'S/ '.$valuep1['precio']; ?></li>
                                                     </ul>
@@ -349,7 +349,7 @@ $producto = json_decode($response, true);
                                                 <?php }  ?>
                                                 </div>
                                                 <div class="product__details">
-                                                    <h2><a href="product-details.html"><?php echo $valuep2['descripcion']; ?></a></h2>
+                                                    <h2><a href="agregar_item_carro.php?id=<?php echo $valuep2['idProducto']; ?>&&precio=<?php echo $valuep2['precio']; ?>"><?php echo $valuep2['descripcion']; ?></a></h2>
                                                     <ul class="product__price">
                                                         <li class="new__price"><?php echo 'S/ '.$valuep2['precio']; ?></li>
                                                     </ul>
@@ -389,7 +389,7 @@ $producto = json_decode($response, true);
                                                 <?php }  ?>
                                                 </div>
                                                 <div class="product__details">
-                                                    <h2><a href="product-details.html"><?php echo $valuep3['descripcion']; ?></a></h2>
+                                                    <h2><a href="agregar_item_carro.php?id=<?php echo $valuep3['idProducto']; ?>&&precio=<?php echo $valuep3['precio']; ?>"><?php echo $valuep3['descripcion']; ?></a></h2>
                                                     <ul class="product__price">
                                                         <li class="new__price"><?php echo 'S/ '.$valuep3['precio']; ?></li>
                                                     </ul>

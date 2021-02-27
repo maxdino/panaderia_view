@@ -238,7 +238,7 @@ $producto = json_decode($response, true);
                         </div>
                     </div>
                     <div class="product__details">
-                        <h2><a href="product-details.html"><?php echo $valuep['descripcion']; ?></a></h2>
+                        <h2><a href="agregar_item_carro.php?id=<?php echo $valuep['idProducto']; ?>&&precio=<?php echo $valuep['precio']; ?>"><?php echo $valuep['descripcion']; ?></a></h2>
                         <ul class="product__price">
                             <li class="new__price"><?php echo 'S/ '.$valuep['precio']; ?></li>
                         </ul>
