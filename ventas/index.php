@@ -48,7 +48,53 @@
               </div>
             </div>
             <!-- Contenido (cuerpo) -->
-            <div class="row">
+            <div class="row" id="div_detalle"  style="display: none;">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body" id="cuerpo_pagina"> 
+                  <div class="row">
+                   <div class="col-md-12">
+                    <div class="table-responsive">
+                     <table class="table display product-overview mb-30" id="tbl_detalle_venta">
+                      <thead>
+                         <tr>
+                          <th >NOMBRE:</th>
+                          <th id="cliente_venta" style="text-align: left;"  ></th>
+                          <th  ></th>
+                          <th width="15%">TELEFONO:</th>
+                          <th id="telefono_venta" width="10%"></th>
+                        </tr>
+                        <tr>
+                          <th width="10%"  >DIRECCIÓN:</th>
+                          <th  id="direccion_venta" colspan="2"></th>
+                          <th width="30%">EMAIL:</th>
+                          <th id="email_venta" width="35%"  ></th>
+                        </tr>
+                        <tr>
+                         
+                         
+                        </tr>
+                        <tr>
+                          <th width="10%">#</th>
+                          <th width="45%">Producto</th>
+                          <th width="15%">Cantidad</th>
+                          <th width="15%">Precio</th>
+                          <th width="15%">Importe</th>
+                        </tr>
+                      </thead>
+                      <tbody id="detalle_venta">
+                      
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+            <div class="row" >
               <div class="col-12">
                 <div class="card">
                   <div class="card-body" id="cuerpo_pagina"> 
@@ -74,7 +120,7 @@
                           echo "<td>".$value["fecha"]." ".$value["hora"]."</td>";
                           echo "<td>".$value["monto"]."</td>";
                            ?>
-                          <td><a href="eliminar.php?id=<?php echo $value['idVenta']; ?>" class="text-inverse" title="Ver" data-toggle="tooltip"><i class=" ti-eye txt-danger"></i></a> <a href="editar.php?id=<?php echo $value['idVenta']; ?>" class="text-inverse" title="Editar" data-toggle="tooltip"><i class="mdi mdi-table-edit txt-danger"></i></a></td>
+                          <td><a onclick="ver_venta(<?php echo (int)($value["idVenta"]); ?>)" class="text-inverse" title="Ver" data-toggle="tooltip"><i class=" ti-eye txt-danger"></i></a> </td>
                           <?php echo "</tr>";
                           $c++;
                       }  }  } ?>
@@ -94,6 +140,25 @@
       <?php include "../includes/js.php"; ?>
       <script type="text/javascript">
      $('#myTable').DataTable({"order": [[ 0, 'desc' ]]});
+    
+     function ver_venta(id){
+      $('#tbl_detalle_venta tbody').empty();
+     $.post('detalle_venta.php',{'id':id},function(data){
+      obj = JSON.parse(data);
+      $('#cliente_venta').html(obj['Detalles'][0]['nombres']+' '+obj['Detalles'][0]['apellido1']+' '+obj['Detalles'][0]['apellido2']); 
+      $('#direccion_venta').html(obj['Detalles'][0]['direccion']); 
+      $('#telefono_venta').html(obj['Detalles'][0]['telefono']); 
+      $('#email_venta').html(obj['Detalles'][0]['email']); 
+      for (var i = 0; i < obj['detalle_ventas'].length; i++) {
+        $('#tbl_detalle_venta').append('<tr><td>'+parseFloat(parseFloat(i)+parseFloat(1))+'</td><td  >'+obj['detalle_ventas'][i]['descripcion']+'</td><td>'+obj['detalle_ventas'][i]['cantidad']+'</td><td> S/ '+obj['detalle_ventas'][i]['precio']+'</td><td> S/ '+parseFloat(obj['detalle_ventas'][i]['precio']*obj['detalle_ventas'][i]['cantidad']).toFixed(2)+'</td></tr>');
+      }
+      $('#tbl_detalle_venta').append('<tr><th colspan="4"></th><th> S/ '+parseFloat(obj['Detalles'][0]['monto']).toFixed(2)+'</th></tr>');
+     })
+     $("#div_detalle").fadeIn();
+     setTimeout(function() {
+        $("#div_detalle").fadeOut(1500);
+    },20000);
+   }
    </script>
     </body>
 

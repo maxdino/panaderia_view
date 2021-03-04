@@ -96,7 +96,7 @@
                           <div class="skin skin-minimal"> 
                             <div class="form-row">
                               <div class="col-md-12 mb-12">
-                                <center><label for="validationDefault03">MODULO PADRE</label></center>
+                                <center><label for="validationDefault03">PERFIL</label></center>
                                 <select class="select2 form-control custom-select" onchange="permisos();" name="perfil" id="perfil" style="width: 100%; height:36px;">
                                   <option></option>
                                   <?php if ($perfil['Status']=='200') {

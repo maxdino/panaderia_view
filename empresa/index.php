@@ -1,7 +1,7 @@
         <?php
         include '../permisos.php';//modulos del navbar lateral
 
-        $data = array('titulo_descripcion' => 'Perfil', );
+        $data = array('titulo_descripcion' => 'Empresa', );
         if($_COOKIE['imagen']==""){
           $ver="icono_perfil.png";
         }else{
@@ -10,7 +10,7 @@
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'http://polvazo.informaticapp.com/perfiles',
+          CURLOPT_URL => 'http://localhost/panaderia/index.php/empresa',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -54,7 +54,7 @@
                   <div class="card-body" id="cuerpo_pagina"> 
                     <div class="row">
                      <div class="col-md-12">
-                      <a href="agregar.php"><button class="btn  btn-success" >Agregar Perfil</button></a>
+                      <a href="agregar.php"><button class="btn  btn-success" >Agregar Empresa</button></a>
                     </div>
                   </div>
                   <div class="row">
@@ -64,21 +64,20 @@
                       <thead>
                         <tr>
                           <th width="10%">#</th>
-                          <th width="40%">Perfil</th>
+                          <th width="40%">Empresa</th>
                           <th width="10%">Acciones</th>
                         </tr>
                       </thead>
                       <tbody id="cuerpo_tabla">
                        <?php if ($perfil['Status']=='200') { 
-                        $c=1; foreach ($perfil["Detalles"] as $key => $value) { if ($_COOKIE['id_empresa']==$value['id_empresa']) {
-                          $a="'perfiles',".$value["perfil_id"];
+                        $c=1; foreach ($perfil["Detalles"] as $key => $value) {  
                           echo "<tr>";
                           echo "<td>".$c."</td>";
-                          echo "<td>".$value["perfil_descripcion"]."</td>"; ?>
-                          <td><a href="eliminar.php?id=<?php echo $value['perfil_id']; ?>" class="text-inverse" title="Eliminar" data-toggle="tooltip"><i class="mdi mdi-delete-empty txt-danger"></i></a> <a href="editar.php?id=<?php echo $value['perfil_id']; ?>" class="text-inverse" title="Editar" data-toggle="tooltip"><i class="mdi mdi-table-edit txt-danger"></i></a></td>
+                          echo "<td>".$value["descripcion"]."</td>"; ?>
+                          <td><a href="eliminar.php?id=<?php echo $value['id_empresa']; ?>" class="text-inverse" title="Eliminar" data-toggle="tooltip"><i class="mdi mdi-delete-empty txt-danger"></i></a> <a href="editar.php?id=<?php echo $value['id_empresa']; ?>" class="text-inverse" title="Editar" data-toggle="tooltip"><i class="mdi mdi-table-edit txt-danger"></i></a></td>
                           <?php echo "</tr>";
                           $c++;
-                        } }  } ?>
+                          }  } ?>
                       </tbody>
                     </table>
                   </div>

@@ -35,6 +35,29 @@ foreach ($usuario['Detalles'] as $key => $value) { if ($value['usuario']==$_POST
     setcookie('email',$value['email'],time()+604800,'/');
     setcookie('imagen',$value['imagen'],time()+604800,'/');
     setcookie('estado',$value['estado'],time()+604800,'/');
+    //
+    $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://localhost/panaderia/index.php/empresa/'.$value['id_empresa'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+              'Content-Type: application/x-www-form-urlencoded'
+            ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          $empresa = json_decode($response, true);
+          setcookie('imagen_empresa_admin',$empresa['Detalles']['imagen'],time()+604800,'/');
     $valida=1;
 }
     # code...
@@ -57,7 +80,7 @@ if ($valida==1) {
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost/Panaderia_view/librerias/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost/Panaderia_view/librerias/imagen/iconos/logo_polvazo_5.png">
     <title>Panaderia</title>
     <!-- Bootstrap Core CSS -->
     <link href="http://localhost/Panaderia_view/librerias/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -86,7 +109,7 @@ if ($valida==1) {
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" method="post" action=""  >
-                    <a href="javascript:void(0)" class="text-center db"><img style="width: 300px;height: 200px;" src="http://localhost/Panaderia_view/librerias/assets/images/logo_pan.jpg" alt="Home" /><br/>
+                    <a href="javascript:void(0)" class="text-center db"><img style="width: 300px;height: 200px;" src="http://localhost/Panaderia_view/librerias/imagen/iconos/logo_polvazo_3.png" alt="Home" /><br/>
                         <!-- <img src="http://localhost/Panaderia_view/librerias/assets/images/logo-text.png" alt="Home" /></a> -->
                         <div class="form-group m-t-40">
                             <div class="col-xs-12">

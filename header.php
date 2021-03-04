@@ -9,7 +9,7 @@
             <meta name="author" content="">
             <?php $url_carpeta = 'http://localhost/Panaderia_view/';  ?>
             <!-- Favicon icon -->
-            <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $url_carpeta;?>librerias/assets/images/favicon.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $url_carpeta;?>librerias/imagen/iconos/logo_polvazo_5.png">
             <title>Panaderia y Pasteleria</title>
             <!-- Bootstrap Core CSS -->
             <?php include "../includes/css.php"; ?>
@@ -23,7 +23,7 @@
             <div class="preloader">
                 <div class="loader">
                     <div class="loader__figure"></div>
-                    <p class="loader__label">Energym</p>
+                    <p class="loader__label">Panaderia y Pasteleria</p>
                 </div>
             </div>
  
@@ -37,14 +37,14 @@
                                 <!-- Logo icon --><b>
                                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                     <!-- Dark Logo icon -->
-                                    <img src="<?php echo $url_carpeta;?>librerias/assets/images/logo_pan1.png" style="    width: 50px;" alt="homepage" class="dark-logo" />
+                                    <img src="<?php echo $url_carpeta;?>librerias/imagen/iconos/logo_polvazo_4.png" style="    width: 50px;" alt="homepage" class="dark-logo" />
                                     <!-- Light Logo icon -->
                                     <img src="<?php echo $url_carpeta;?>librerias/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                                 </b>
                                 <!--End Logo icon -->
                                 <!-- Logo text --><span>
                                  <!-- dark Logo text -->
-                                 <img style="width: 150px;height: 50px;" src="<?php echo $url_carpeta;?>librerias/assets/images/logo_pan.jpg" alt="homepage" class="dark-logo" />
+                                 <img style="width: 150px;height: 50px;" src="<?php echo $url_carpeta;?>librerias/imagen/<?php echo $_COOKIE['imagen_empresa_admin']; ?>" alt="homepage" class="dark-logo" />
                                  <!-- Light Logo text -->    
                                  <img src="<?php echo $url_carpeta;?>librerias/assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
                              </div>
@@ -70,7 +70,7 @@
                                                         </div>
                                                     </li>
                                                     <li role="separator" class="divider"></li>
-                                                    <li><a href="<?php echo $url_carpeta?>Login/cerrar_session"><i class="fa fa-power-off"></i> Cerrar Sesión</a></li>
+                                                    <li><a href="../cerrar_session.php"><i class="fa fa-power-off"></i> Cerrar Sesión</a></li>
                                                 </ul>
                                             </div>
                                         </li>
