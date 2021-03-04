@@ -29,7 +29,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/perfiles/'.$_GET['id'],
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/perfiles/'.$_COOKIE['id_empresa'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -38,7 +38,8 @@
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg=='
+              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+              'Content-Type: application/x-www-form-urlencoded'
             ),
           ));
 
@@ -46,8 +47,13 @@
 
           curl_close($curl);
           $perfil = json_decode($response, true);
-
-
+ 
+          foreach ($perfil['Detalles'] as $key => $value) {
+            if ($_GET['id']==$value['perfil_id']) {
+              $descripcion = $value['perfil_descripcion'];
+              $id_perfil = $value['perfil_id'];
+            }
+          }
         }
         include '../permisos.php';//modulos del navbar lateral
 
@@ -96,9 +102,9 @@
                           <div class="form-wrap">
                             <form method="POST" action="">
                               <div class="form-group">
-                                <input type="hidden"  name="id" id="id" value="<?php echo $perfil['Detalles']['perfil_id']; ?>">
+                                <input type="hidden"  name="id" id="id" value="<?php echo $id_perfil; ?>">
                                 <label class="control-label mb-10 text-left">DESCRIPCION DE PERFIL</label>
-                                <input type="text" class="form-control" required="true" name="perfil" id="perfil" autofocus="true" value="<?php echo $perfil['Detalles']['perfil_descripcion']; ?>">
+                                <input type="text" class="form-control" required="true" name="perfil" id="perfil" autofocus="true" value="<?php echo $descripcion; ?>">
                               </div>  
                               <br>
                               <center><a ><button class="btn btn-primary">Guardar</button></a><a href="index.php"><button class="btn btn-danger" type="button" >Cancelar</button></a></center>                
