@@ -3,7 +3,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/ingredientes',
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/ingredientes',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -28,27 +28,27 @@
           $data = json_decode($response, true);
           header('Location:index.php');  
         }else{
-           $curl = curl_init();
+         $curl = curl_init();
 
-          curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/unidad_medida',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg=='
-            ),
-          ));
+         curl_setopt_array($curl, array(
+          CURLOPT_URL => 'http://polvazo.informaticapp.com/unidad_medida',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+          CURLOPT_HTTPHEADER => array(
+            'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg=='
+          ),
+        ));
 
-          $response = curl_exec($curl);
+         $response = curl_exec($curl);
 
-          curl_close($curl);
-          $unidad_medida = json_decode($response, true);
-        }
+         curl_close($curl);
+         $unidad_medida = json_decode($response, true);
+       }
         include '../permisos.php';//modulos del navbar lateral
 
         $data = array('titulo_descripcion' => 'Agregar Ingredientes' );
@@ -95,18 +95,18 @@
                         <div class="panel-body">
                           <div class="form-wrap">
                             <form method="POST" action="">
-                               <div class="row p-t-0">
-                                <div class="col-md-6">
+                             <div class="row p-t-0">
+                              <div class="col-md-6 mb-3">
                                 <label class="control-label mb-10 text-left">INGREDIENTES</label>
-                                <input type="text" class="form-control" required="true" name="ingredientes" id="ingredientes" autofocus="true" value="" required="">
+                                <input type="text" class="form-control solo_letras" onchange="borrar_espacios('ingredientes')" required="true" name="ingredientes" id="ingredientes" autofocus="true" value="" required="">
                               </div> 
-                              <div class="col-md-6">
+                              <div class="col-md-6 mb-3">
                                 <label class="control-label mb-10 text-left">CANTIDAD</label>
-                                <input type="text" class="form-control" required="true" name="cantidad" id="cantidad" autofocus="true" value="" required="">
+                                <input type="text" class="form-control solo_numero" maxlength="4" required="true" name="cantidad" id="cantidad" autofocus="true" value="" required="">
                               </div>
                             </div>
-                              <div class="form-group">
-                                <label for="unidad_medida">UNIDAD MEDIDA</label>
+                            <div class="form-group mb-3">
+                              <label for="unidad_medida">UNIDAD MEDIDA</label>
                               <?php if ($unidad_medida['Status']=='200') { ?>
                                 <select class="select2  " name="unidad_medida" id="unidad_medida" style="width: 100%; height:36px;">
                                   <option></option>
@@ -115,27 +115,44 @@
                                   } } ?>
                                 </select> 
                               <?php } ?>
-                              </div>
-                              <br>
-                              <center><a ><button class="btn btn-primary">Guardar</button></a><a href="index.php"><button class="btn btn-danger" type="button" >Cancelar</button></a></center>                
-                            </form>
-                          </div>
+                            </div>
+                            <br>
+                            <center><a ><button class="btn btn-success">Guardar</button></a><a href="index.php"><button class="btn btn-danger" type="button" >Cancelar</button></a></center>                
+                          </form>
                         </div>
                       </div>
                     </div>
-
                   </div>
+
                 </div>
               </div>
-            </div>  
+            </div>
+          </div>  
 
-            <?php include "../footer.php"; ?>   
-            <?php include "../includes/js.php"; ?>
-            <script type="text/javascript">
-              $(function() {
-              $('#unidad_medida').select2();
-            });
-            </script>
-          </body>
+          <?php include "../footer.php"; ?>   
+          <?php include "../includes/js.php"; ?>
+          <script type="text/javascript">
+           $('.solo_precio').on('input', function () { 
+            this.value = this.value.replace(/[^0-9.]/g,'');
+          });
+           $('.solo_numero').on('input', function () { 
+            this.value = this.value.replace(/[^0-9]/g,'');
+          });
+           $('.solo_letras').on('input', function () { 
+            this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+           function borrar_espacios(name){
+            cadena = $('#'+name).val();
+            $('#'+name).val($.trim(cadena));
+          }
+          function formato_numero(name){
+            formato = $('#'+name).val();
+            $('#'+name).val(parseFloat(formato).toFixed(2));
+          }
+          $(function() {
+            $('#unidad_medida').select2();
+          });
+        </script>
+      </body>
 
-          </html>
+      </html>

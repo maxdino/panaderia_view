@@ -59,7 +59,7 @@
           $response = curl_exec($curl);
           curl_close($curl);
           $perfiles = json_decode($response, true);
-   
+
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
@@ -84,7 +84,7 @@
         }
         include '../permisos.php';//modulos del navbar lateral
 
-        $data = array('titulo_descripcion' => 'Agregar Usuario' );
+        $data = array('titulo_descripcion' => 'Modificar Usuario' );
         if($_COOKIE['imagen']==""){
           $ver="icono_perfil.png";
         }else{
@@ -187,142 +187,142 @@
                             </div>
                             <div class="avatar-preview">
                               <?php if($listar_usuario['Detalles']['imagen']!=''){ $url_usuario = $url_carpeta."librerias/imagen/".$listar_usuario['Detalles']['imagen']; }else{ $url_usuario =  $url_carpeta."librerias/assets/images/foto_perfil/defecto_imagen.png";
-                              }  ?>
-                              <input type="hidden" name="imagen_valida" value="<?php echo $listar_usuario['Detalles']['imagen']; ?>">
-                              <img  id="imagePreview" style="background-image: url(<?php echo $url_usuario ?>);"/>
-                            </div> 
-                          </div>  
-                        </center>
-                      </div>
-
+                            }  ?>
+                            <input type="hidden" name="imagen_valida" value="<?php echo $listar_usuario['Detalles']['imagen']; ?>">
+                            <img  id="imagePreview" style="background-image: url(<?php echo $url_usuario ?>);"/>
+                          </div> 
+                        </div>  
+                      </center>
                     </div>
+
                   </div>
-                  <!-- Column -->
-                  <!-- Column -->
-                  <div class="col-lg-8 col-xlg-9 col-md-7">
-                    <div class="card">
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs profile-tab" role="tablist"> 
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
-                      </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <!--second tab-->
-                        <div class="tab-pane active" id="profile" role="tabpanel">
-                          <div class="card-body">
-                           <form action="#">
-                            <div class="form-body">
-                              <h3 class="card-title">USUARIO</h3>
-                              <hr>
-                              <div class="row p-t-0">
-                                <div class="col-md-6">
-                                  <input type="hidden" name="id" value="<?php echo $listar_usuario['Detalles']['idEmpleado']; ?>">
-                                  <label for="validationDefault01">NOMBRES</label>
-                                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $listar_usuario['Detalles']['nombres']; ?>" required>
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="apellido1">APELLIDO PATERNO</label>
-                                  <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="<?php echo $listar_usuario['Detalles']['apellido_paterno']; ?>" required>
-                                </div>
-                                <!--/span-->
-                              </div>
-                              <div class="row p-t-0">
-                               <div class="col-md-6">
-                                <label for="apellido2">APELLIDO MATERNO</label>
-                                <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="<?php echo $listar_usuario['Detalles']['apellido_materno']; ?>" required>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                  <div class="card">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs profile-tab" role="tablist"> 
+                      <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <!--second tab-->
+                      <div class="tab-pane active" id="profile" role="tabpanel">
+                        <div class="card-body">
+                         <form action="#">
+                          <div class="form-body">
+                            <h3 class="card-title">USUARIO</h3>
+                            <hr>
+                            <div class="row p-t-0">
+                              <div class="col-md-6">
+                                <input type="hidden" name="id" value="<?php echo $listar_usuario['Detalles']['idEmpleado']; ?>">
+                                <label for="validationDefault01">NOMBRES</label>
+                                <input type="text" class="form-control solo_letras" id="nombre" onchange="borrar_espacios('nombre')" name="nombre" placeholder="Nombre" value="<?php echo $listar_usuario['Detalles']['nombres']; ?>" required>
                               </div>
                               <div class="col-md-6">
-                                <label for="direccion">DIRECCIÓN</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" value="<?php echo $listar_usuario['Detalles']['direccion']; ?>" required>
+                                <label for="apellido1">APELLIDO PATERNO</label>
+                                <input type="text" class="form-control solo_letras" onchange="borrar_espacios('apellido1')" id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="<?php echo $listar_usuario['Detalles']['apellido_paterno']; ?>" required>
                               </div>
                               <!--/span-->
                             </div>
-                            <!--/row-->
                             <div class="row p-t-0">
                              <div class="col-md-6">
-                              <label for="telefono">TELEFONO</label>
-                              <input type="text" class="form-control" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="<?php echo $listar_usuario['Detalles']['telefono']; ?>" required>
+                              <label for="apellido2">APELLIDO MATERNO</label>
+                              <input type="text" class="form-control solo_letras" onchange="borrar_espacios('apellido2')" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="<?php echo $listar_usuario['Detalles']['apellido_materno']; ?>" required>
                             </div>
                             <div class="col-md-6">
-                              <label for="email">EMAIL</label>
-                              <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $listar_usuario['Detalles']['email']; ?>" required>
+                              <label for="direccion">DIRECCIÓN</label>
+                              <input type="text" class="form-control solo_direccion" onchange="borrar_espacios('direccion')" id="direccion" name="direccion" placeholder="Direccion" value="<?php echo $listar_usuario['Detalles']['direccion']; ?>" required>
                             </div>
+                            <!--/span-->
                           </div>
+                          <!--/row-->
                           <div class="row p-t-0">
-                            <div class="col-md-6">
-                              <label for="validationDefault03">PERFILES</label>
-                              <?php if ($perfiles['Status']=='200') { ?>
-                                <select class="select2  " name="perfil" id="perfil" style="width: 100%; height:36px;">
-                                  <?php  foreach ($perfiles["Detalles"] as $key => $value) { if ($value['id_empresa']==$_COOKIE['id_empresa']) { 
-                                    if ($listar_usuario['Detalles']['perfil_id']==$value["perfil_id"]) { 
+                           <div class="col-md-6">
+                            <label for="telefono">TELEFONO</label>
+                            <input type="text" class="form-control solo_numero" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="<?php echo $listar_usuario['Detalles']['telefono']; ?>" required>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="email">EMAIL</label>
+                            <input type="text" class="form-control" onchange="validar_correo()" id="email" name="email" placeholder="Email" value="<?php echo $listar_usuario['Detalles']['email']; ?>" required>
+                          </div>
+                        </div>
+                        <div class="row p-t-0">
+                          <div class="col-md-6">
+                            <label for="validationDefault03">PERFILES</label>
+                            <?php if ($perfiles['Status']=='200') { ?>
+                              <select class="select2  " name="perfil" id="perfil" style="width: 100%; height:36px;">
+                                <?php  foreach ($perfiles["Detalles"] as $key => $value) { if ($value['id_empresa']==$_COOKIE['id_empresa']) { 
+                                  if ($listar_usuario['Detalles']['perfil_id']==$value["perfil_id"]) { 
                                     echo "<option value='".$value["perfil_id"]."' selected>".$value["perfil_descripcion"]."</option>";
                                   }else{
-                                     echo "<option value='".$value["perfil_id"]."'>".$value["perfil_descripcion"]."</option>";
-                                  }
-                                  } } ?>
-                                </select> 
-                              <?php } ?>
-                            </div>
-                          <div class="col-md-6">
-                              <label for="email">USUARIO</label>
-                              <input type="text" class="form-control" id="usuario" name="usuario" value="<?php echo $listar_usuario['Detalles']['usuario']; ?>" placeholder="Usuario" required>
-                            </div>
-
-                          </div>
-                          <div class="row p-t-0">
-                            <div class="col-md-6">
-                              <label for="email">CLAVE</label>
-                              <input type="password" class="form-control" id="clave" name="clave" value="<?php echo $listar_usuario['Detalles']['clave']; ?>" placeholder="Clave"  required>
-                            </div>
-                          </div>
-                          <!--/span-->
+                                   echo "<option value='".$value["perfil_id"]."'>".$value["perfil_descripcion"]."</option>";
+                                 }
+                               } } ?>
+                             </select> 
+                           <?php } ?>
+                         </div>
+                         <div class="col-md-6">
+                          <label for="email">USUARIO</label>
+                          <input type="text" class="form-control" id="usuario" onchange="borrar_espacios('usuario')" name="usuario" value="<?php echo $listar_usuario['Detalles']['usuario']; ?>" placeholder="Usuario" required>
                         </div>
-                        <!--/row-->
+
                       </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                        <a   href="index.php" class="btn btn-inverse">Cancel</a>
+                      <div class="row p-t-0">
+                        <div class="col-md-6">
+                          <label for="email">CLAVE</label>
+                          <input type="password" class="form-control" onchange="borrar_espacios('clave')" id="clave" name="clave" value="<?php echo $listar_usuario['Detalles']['clave']; ?>" placeholder="Clave"  required>
+                        </div>
                       </div>
+                      <!--/span-->
                     </div>
+                    <!--/row-->
+                  </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                    <a   href="index.php" class="btn btn-inverse">Cancel</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
+    </form>
+  </div>
 
 
-      <?php include "../footer.php"; ?>   
-      <?php include "../includes/js.php"; ?>
-      <script type="text/javascript">
-        $(function() {
-         $('#perfil').select2();
+  <?php include "../footer.php"; ?>   
+  <?php include "../includes/js.php"; ?>
+  <script type="text/javascript">
+    $(function() {
+     $('#perfil').select2();
 
-       });
-     </script>
-     <script type="text/javascript"> 
-      function readURL(input) {
-        var  variable;
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function(e) { 
-            $('#imagePreview').css('background-image', 'url('+e.target.result +')'); 
-            $('#imagePreview').attr('src', e.target.result);
-            $(".foto_perfilupdate").attr('src', e.target.result);
-            $("#foto_perfilupdate").attr('src', e.target.result);
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650); 
+   });
+ </script>
+ <script type="text/javascript"> 
+  function readURL(input) {
+    var  variable;
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) { 
+        $('#imagePreview').css('background-image', 'url('+e.target.result +')'); 
+        $('#imagePreview').attr('src', e.target.result);
+        $(".foto_perfilupdate").attr('src', e.target.result);
+        $("#foto_perfilupdate").attr('src', e.target.result);
+        $('#imagePreview').hide();
+        $('#imagePreview').fadeIn(650); 
 
-          }                         
-          reader.readAsDataURL(input.files[0]); 
-        }
-      }
-      $("#imageUpload").change(function() {
-       readURL(this);  
-     });
-      function llamarfuncion(){ 
-        $.ajax({
+      }                         
+      reader.readAsDataURL(input.files[0]); 
+    }
+  }
+  $("#imageUpload").change(function() {
+   readURL(this);  
+ });
+  function llamarfuncion(){ 
+    $.ajax({
                 url: base_url+'Editarusuario/guardar', // url where to submit the request
                 type : "POST", // type of action POST || GET
                 dataType : 'json', // data type
@@ -334,6 +334,28 @@
                   console.log(xhr, resp, text);
                 }
               })
+  }
+
+  $('.solo_numero').on('input', function () { 
+    this.value = this.value.replace(/[^0-9]/g,'');
+  });
+  $('.solo_direccion').on('input', function () { 
+    this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+  });
+  $('.solo_letras').on('input', function () { 
+    this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+  });
+  function borrar_espacios(name){
+    cadena = $('#'+name).val();
+    $('#'+name).val($.trim(cadena));
+  }
+  function validar_correo(){
+    correo = $('#email').val();
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+        if (!emailRegex.test(correo)) {
+          $('#email').val('');   
+        } 
       }
     </script>
 

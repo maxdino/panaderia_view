@@ -66,7 +66,7 @@
                                                         <div class="u-img"><img class="foto_perfilupdate" src="<?php echo $url_carpeta.'librerias/imagen/'.$ver; ?>" alt="user"></div>
                                                         <div class="u-text">
                                                             <h4><?php echo $_COOKIE['nombres']; ?></h4>
-                                                            <p class="text-muted"><?php echo $_COOKIE['email']; ?></p><a href="<?php echo $url_carpeta?>Editarusuario" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+                                                            <p class="text-muted"><?php echo $_COOKIE['email']; ?></p><a href="../perfil_usuario/editar_perfil.php" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
                                                         </div>
                                                     </li>
                                                     <li role="separator" class="divider"></li>

@@ -11,3 +11,8 @@
     <script src="../librerias/assets1/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="../librerias/assets1/js/main.js"></script>
+
+    <!-- Custom functions file -->
+    <script src="../librerias/alertas/js/functions.js"></script>
+    <!-- Sweet Alert Script -->
+    <script src="../librerias/alertas/js/sweetalert.min.js"></script>

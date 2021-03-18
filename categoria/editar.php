@@ -105,7 +105,7 @@
                               <div class="form-group">
                                 <input type="hidden"  name="id" id="id" value="<?php echo $perfil['Detalles']['id_categoria']; ?>">
                                 <label class="control-label mb-10 text-left">DESCRIPCION DE CATEGORIA</label>
-                                <input type="text" class="form-control" required="true" name="categoria" id="categoria" autofocus="true" value="<?php echo $perfil['Detalles']['categoria']; ?>">
+                                <input type="text" class="form-control solo_letras" onchange="borrar_espacios('categoria')"  required="true" name="categoria" id="categoria" autofocus="true" value="<?php echo $perfil['Detalles']['categoria']; ?>">
                               </div>  
                               <div class="form-group">
                                 <input type="hidden"  name="imagen_valida" id="imagen_valida" value="<?php echo $perfil['Detalles']['imagen']; ?>">
@@ -128,7 +128,23 @@
             <?php include "../footer.php"; ?>   
             <?php include "../includes/js.php"; ?>
             <script type="text/javascript">
-
+              $('.solo_precio').on('input', function () { 
+                this.value = this.value.replace(/[^0-9.]/g,'');
+              });
+              $('.solo_numero').on('input', function () { 
+                this.value = this.value.replace(/[^0-9.]/g,'');
+              });
+              $('.solo_letras').on('input', function () { 
+                this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+              });
+              function borrar_espacios(name){
+                cadena = $('#'+name).val();
+                $('#'+name).val($.trim(cadena));
+              }
+              function formato_numero(name){
+                formato = $('#'+name).val();
+                $('#'+name).val(parseFloat(formato).toFixed(2));
+              }
             </script>
           </body>
 

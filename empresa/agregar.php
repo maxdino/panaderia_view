@@ -28,7 +28,119 @@
           $response = curl_exec($curl);
 
           curl_close($curl);
+          $empresa = json_decode($response, true);
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/perfiles',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 
+            'perfil=SUPER USUARIO'.
+            '&empresa='.$empresa['empresa'],
+            CURLOPT_HTTPHEADER => array(
+              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+              'Content-Type: application/x-www-form-urlencoded'
+            ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          $perfil = json_decode($response, true);
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/modulos',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg=='
+            ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          $modulos = json_decode($response, true);
+
+          $mo=''; 
+          foreach ($modulos['Detalles'] as $key => $value) { 
+            if ($value['modulo_padre']!=1) { 
+              $mo .= '&permisos[]='.$value['modulo_id'];
+            }
+          }
+          $curl = curl_init();
+          
+          curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/permisos_modulo',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 
+            'perfil='.$perfil["perfil"].
+            $mo,
+
+            CURLOPT_HTTPHEADER => array(
+              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+              'Content-Type: application/x-www-form-urlencoded'
+            ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
           $data = json_decode($response, true);
+
+          $usuario_clave = str_replace(' ','', $_POST['nombre']);
+          $curl = curl_init();
+          
+          curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/usuario',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 
+            'nombres=SUPER USUARIO'.
+            '&apellido_paterno=SUPER USUARIO'.
+            '&apellido_materno=SUPER USUARIO'.
+            '&direccion=SUPER USUARIO'.
+            '&telefono=999999999'.
+            '&empresa='.$empresa["empresa"].
+            '&email=superusuario@hotmail.com'.
+            '&perfil='.$perfil["perfil"].
+            '&usuario='.strtolower($usuario_clave).
+            '&clave='.strtolower($usuario_clave).
+            '&imagen='.$imagen,
+            CURLOPT_HTTPHEADER => array(
+              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+              'Content-Type: application/x-www-form-urlencoded'
+            ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
           header('Location:index.php');  
         } 
         include '../permisos.php';//modulos del navbar lateral
@@ -140,7 +252,7 @@
                           <br><input type="hidden"  name="id" id="id">
                           <div class="row form-group has-success">
                             <label class="form-control-label" for="success">EMPRESA</label>
-                            <input type="text" required="" class="form-control form-control-success" id="nombre" name="nombre">
+                            <input type="text" required="" class="form-control form-control-success solo_letras" onchange="borrar_espacios('nombre')" id="nombre" name="nombre">
                           </div> 
                         </div>  
                       </center>
@@ -163,16 +275,16 @@
                         <div class="card-body">
                          <form action="#">
                           <div class="form-body">
-                            <h3 class="card-title">PRODUCTO</h3>
+                            <h3 class="card-title">REGISTRO</h3>
                             <hr>
-                            <div class="row  ">
+                            <div class="row">
                               <div class="col-md-4 mb-3" >
                                 <label for="cantidad">RUC</label>
-                                <input type="text" class="form-control solo_numero" maxlength="11" id="ruc" name="ruc" placeholder="RUC" value="" required>
+                                <input type="text" class="form-control solo_numero" onkeyup="validar_ruc()" maxlength="11" id="ruc" name="ruc" placeholder="RUC" value="" required>
                               </div>
                               <div class="col-md-4 mb-3">
                                 <label for="precio">EMAIL</label>
-                                <input type="text" class="form-control " id="email" name="email" placeholder="email" value="" required>
+                                <input type="text" class="form-control " onchange="validar_correo()" id="email" name="email" placeholder="email" value="" required>
                               </div>
                               <div class="col-md-4 mb-3">
                                 <label for="precio">TELEFONO</label>
@@ -183,7 +295,7 @@
                             <div class="row ">
                               <div class="col-md-12 mb-3">
                                 <label for="cantidad">DIRECCIÓN</label>
-                                <input type="text" class="form-control"  id="direccion" name="direccion" placeholder="DIRECCION" value="" required>
+                                <input type="text" class="form-control solo_direccion" onchange="borrar_espacios('direccion')" id="direccion" name="direccion" placeholder="DIRECCION" value="" required>
                               </div>
                               <!--/span-->
                             </div>
@@ -209,7 +321,8 @@
                     </div>
                   </div>
                 </div> 
-              </div> 
+              </div>
+
             </form>
 
 
@@ -249,11 +362,41 @@
             $('.solo_precio').on('input', function () { 
               this.value = this.value.replace(/[^0-9.]/g,'');
             });
-            $('.solo_serie').on('input', function () { 
-              this.value = this.value.replace(/[^0-9-]/g,'');
+            $('.solo_letras').on('input', function () { 
+              this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
             });
-          </script>
+            function borrar_espacios(name){
+              cadena = $('#'+name).val();
+              $('#'+name).val($.trim(cadena));
+            }
+            $('.solo_direccion').on('input', function () { 
+              this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+            });
 
-        </body>
+            function validar_correo(){
+              correo = $('#email').val();
+              emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+        if (!emailRegex.test(correo)) {
+          $('#email').val('');   
+        } 
+      }
+      function validar_ruc(){
+        valida = $('#ruc').val();
+        if(valida.length==11){
+          $.ajax({
+            type: "GET",
+            url: "https://dniruc.apisperu.com/api/v1/ruc/"+valida+"?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1heC5oaWxhcmlvMzUxQGdtYWlsLmNvbSJ9.mCCS9RsZR7QlO559rdbfSkGwaNZ64uN_OFtz4n3dFJk",
+            success: function(data) {
+             if (!(data.ruc)) {
+              $('#ruc').val('');
+            }  
+          }
+        });
+        }
+      }
+    </script>
 
-        </html>
+  </body>
+
+  </html>

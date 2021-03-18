@@ -12,6 +12,8 @@
   unset ($_COOKIE ["estado"]); 
   unset ($_COOKIE["id_usuario"]); 
   unset ($_COOKIE["imagen_empresa_admin"]); 
+  unset ($_COOKIE["barra_color_fondo"]); 
+  unset ($_COOKIE["barra_color_letra"]); 
   setcookie ('nombres', '', time()-604800,'/'); 
   setcookie ('apellido_paterno', '', time()-604800,'/');
   setcookie ('apellido_materno', '', time()-604800,'/');
@@ -24,6 +26,8 @@
   setcookie ('estado', '', time()-604800,'/');   
   setcookie ('id_usuario', '', time()-604800,'/');
   setcookie ('imagen_empresa_admin', '', time()-604800,'/');
+  setcookie ('barra_color_fondo', '', time()-604800,'/');
+  setcookie ('barra_color_letra', '', time()-604800,'/');
   /*unset ($_COOKIE ["config_usuario"]);
   unset ($_COOKIE ["config_clave"]);
   unset ($_COOKIE ["usuario_nombre"]);

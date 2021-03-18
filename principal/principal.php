@@ -30,15 +30,7 @@
 
                                 <!-- Contenido (cuerpo) -->
 
-                            </div>
-
-                            <footer class="footer">
-                                © <?php echo date('Y') ?> Derechos reservados por ENERGYM CLUB
-                            </footer>
-
-                        </div>
-
-                    </div>
+                            <?php include "../footer.php"; ?>   
 
                     <?php include "../includes/js.php"; ?>
                 </body>

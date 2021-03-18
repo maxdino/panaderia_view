@@ -151,7 +151,7 @@
                   background-position: center;
                 }
               </style>
-              <div class="row">
+ 
                 <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
                   <div class="row">
                    <div class="col-lg-4 col-xlg-3 col-md-5">
@@ -190,40 +190,40 @@
                               <h3 class="card-title">USUARIO</h3>
                               <hr>
                               <div class="row p-t-0">
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                   <label for="validationDefault01">NOMBRES</label>
-                                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="" required>
+                                  <input type="text" class="form-control solo_letras" onchange="borrar_espacios('nombre')" id="nombre" name="nombre" placeholder="Nombre" value="" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                   <label for="apellido1">APELLIDO PATERNO</label>
-                                  <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="" required>
+                                  <input type="text" class="form-control solo_letras" onchange="borrar_espacios('apellido1')"  id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="" required>
                                 </div>
                                 <!--/span-->
                               </div>
                               <div class="row p-t-0">
-                               <div class="col-md-6">
+                               <div class="col-md-6 mb-3">
                                 <label for="apellido2">APELLIDO MATERNO</label>
-                                <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="" required>
+                                <input type="text" class="form-control solo_letras" onchange="borrar_espacios('apellido2')"  id="apellido2" name="apellido2" placeholder="Apellido Materno" value="" required>
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-6 mb-3">
                                 <label for="direccion">DIRECCIÓN</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" value="" required>
+                                <input type="text" class="form-control solo_direccion" id="direccion" onchange="borrar_espacios('direccion')"  name="direccion" placeholder="Direccion" value="" required>
                               </div>
                               <!--/span-->
                             </div>
                             <!--/row-->
                             <div class="row p-t-0">
-                             <div class="col-md-6">
+                             <div class="col-md-6 mb-3">
                               <label for="telefono">TELEFONO</label>
-                              <input type="text" class="form-control" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="" required>
+                              <input type="text" class="form-control solo_numero" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                               <label for="email">EMAIL</label>
-                              <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="" required>
+                              <input type="text" class="form-control" id="email" onchange="validar_correo()" name="email" placeholder="Email"  required>
                             </div>
                           </div>
                           <div class="row p-t-0">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                               <label for="validationDefault03">PERFILES</label>
                               <?php if ($perfiles['Status']=='200') { ?>
                                 <select class="select2  " name="perfil" id="perfil" style="width: 100%; height:36px;">
@@ -233,16 +233,16 @@
                                 </select> 
                               <?php } ?>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                               <label for="email">USUARIO</label>
-                              <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" value="" required>
+                              <input type="text" class="form-control" onchange="borrar_espacios('usuario')" id="usuario" name="usuario" placeholder="Usuario" value="" required>
                             </div>
 
                           </div>
                           <div class="row p-t-0">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                               <label for="email">CLAVE</label>
-                              <input type="password" class="form-control" id="clave" name="clave" placeholder="Clave" value="" required>
+                              <input type="password" class="form-control" id="clave"  onchange="borrar_espacios('clave')"  name="clave" placeholder="Clave" value="" required>
                             </div>
                             
                           </div>
@@ -259,9 +259,9 @@
                 </div>
               </div>
             </div>
-          </div>
+ 
         </form>
-      </div>
+ 
 
 
       <?php include "../footer.php"; ?>   
@@ -305,6 +305,28 @@
                   console.log(xhr, resp, text);
                 }
               })
+      }
+
+          $('.solo_numero').on('input', function () { 
+            this.value = this.value.replace(/[^0-9]/g,'');
+          });
+          $('.solo_direccion').on('input', function () { 
+            this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+          $('.solo_letras').on('input', function () { 
+            this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+          function borrar_espacios(name){
+            cadena = $('#'+name).val();
+            $('#'+name).val($.trim(cadena));
+          }
+          function validar_correo(){
+            correo = $('#email').val();
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+        if (!emailRegex.test(correo)) {
+          $('#email').val('');   
+        } 
       }
     </script>
 

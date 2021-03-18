@@ -54,7 +54,7 @@
                   <div class="card-body" id="cuerpo_pagina"> 
                     <div class="row">
                      <div class="col-md-12">
-                      <a href="agregar.php"><button class="btn  btn-success" >Agregar Categoria</button></a>
+                      <a href="agregar.php"><button class="btn  btn-success" >Agregar Compras</button></a>
                     </div>
                   </div>
                   <div class="row">
@@ -68,7 +68,6 @@
                           <th width="10%">Fecha</th>
                           <th width="15%">Numero correlativo</th>
                           <th width="15%">Monto</th>
-                          <th width="10%">Acciones</th>
                         </tr>
                       </thead>
                       <tbody id="cuerpo_tabla">
@@ -81,7 +80,6 @@
                           echo "<td>".$value["fecha"]."</td>";
                           echo "<td>".$value["numero_correlativo"]."</td>";
                           echo "<td>"."S/ ".number_format($value["monto"], 2, '.', '')."</td>"; ?>
-                          <td><a href="eliminar.php?id=<?php echo $value['id_compras']; ?>" class="text-inverse" title="Eliminar" data-toggle="tooltip"><i class="mdi mdi-delete-empty txt-danger"></i></a> <a href="editar.php?id=<?php echo $value['id_compras']; ?>" class="text-inverse" title="Editar" data-toggle="tooltip"><i class="mdi mdi-table-edit txt-danger"></i></a></td>
                           <?php echo "</tr>";
                           $c++;
                         } }  } ?>

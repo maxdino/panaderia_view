@@ -75,11 +75,11 @@
                             <form method="POST" action="">
                               <div class="form-group">
                                 <label class="control-label mb-10 text-left">DESCRIPCION DE UNIDAD MEDIDA</label>
-                                <input type="text" class="form-control" required="true" name="unidad_medida" id="unidad_medida" autofocus="true" value="" required="">
+                                <input type="text" class="form-control solo_letras_numero" onchange="borrar_espacios('unidad_medida')" required="true" name="unidad_medida" id="unidad_medida" autofocus="true" value="" required="">
                               </div> 
                               <div class="form-group">
                                 <label class="control-label mb-10 text-left">CANTIDAD DE UNIDAD MEDIDA</label>
-                                <input type="text" class="form-control" required="true" name="cantidad" id="cantidad" autofocus="true" value="" required="">
+                                <input type="text" class="form-control solo_numero" maxlength="3" required="true" name="cantidad" id="cantidad" autofocus="true" value="" required="">
                               </div>
 
                               <br>
@@ -98,7 +98,18 @@
             <?php include "../footer.php"; ?>   
             <?php include "../includes/js.php"; ?>
             <script type="text/javascript">
-
+               
+              $('.solo_numero').on('input', function () { 
+                this.value = this.value.replace(/[^0-9.]/g,'');
+              });
+              $('.solo_letras_numero').on('input', function () { 
+                this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9 ]/g,'');
+              });
+              function borrar_espacios(name){
+                cadena = $('#'+name).val();
+                $('#'+name).val($.trim(cadena));
+              }
+               
             </script>
           </body>
 

@@ -3,48 +3,48 @@
           $curl = curl_init();
           $pro='';$uni='';$cant='';$pre='';$importe=0;
           if (count($_POST['producto'])!=0) { 
-          for ($i=0; $i < count($_POST['producto']) ; $i++) { 
-            $pro .= '&producto[]='.$_POST['producto'][$i];
-            $cant .= '&cantidad[]='.$_POST['cantidad'][$i];
-            $pre .= '&precio[]='.$_POST['precio'][$i];
-            $uni .= '&unidad_medida[]='.$_POST['unidad'][$i];
-            $importe=$importe+($_POST['importe'][$i]);
-          }
-           
-          curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://polvazo.informaticapp.com/compras',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => 
-            'proveedor='.$_POST['proveedor'].
-            '&fecha='.date('Y-m-d').
-            '&numero_correlativo='.$_POST['numero_correlativo'].
-            '&monto='.$importe.
-            $pro.
-            $cant.
-            $pre.
-            $uni.
-            '&empresa='.$_COOKIE['id_empresa'],
-            CURLOPT_HTTPHEADER => array(
-              'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
-              'Content-Type: application/x-www-form-urlencoded'
-            ),
-          ));
+            for ($i=0; $i < count($_POST['producto']) ; $i++) { 
+              $pro .= '&producto[]='.$_POST['producto'][$i];
+              $cant .= '&cantidad[]='.$_POST['cantidad'][$i];
+              $pre .= '&precio[]='.$_POST['precio'][$i];
+              $uni .= '&unidad_medida[]='.$_POST['unidad'][$i];
+              $importe=$importe+($_POST['importe'][$i]);
+            }
 
-          $response = curl_exec($curl);
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => 'http://polvazo.informaticapp.com/compras',
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => '',
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 0,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => 'POST',
+              CURLOPT_POSTFIELDS => 
+              'proveedor='.$_POST['proveedor'].
+              '&fecha='.date('Y-m-d').
+              '&numero_correlativo='.$_POST['numero_correlativo'].
+              '&monto='.$importe.
+              $pro.
+              $cant.
+              $pre.
+              $uni.
+              '&empresa='.$_COOKIE['id_empresa'],
+              CURLOPT_HTTPHEADER => array(
+                'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
+                'Content-Type: application/x-www-form-urlencoded'
+              ),
+            ));
 
-          curl_close($curl);
-          $data = json_decode($response, true);
-          header('Location:index.php');  
-        }else{
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            $data = json_decode($response, true);
+            header('Location:index.php');  
+          }else{
            header('Location:agregar.php');  
-        }
-        }else{
+         }
+       }else{
          $curl = curl_init();
 
          curl_setopt_array($curl, array(
@@ -138,7 +138,7 @@
               </div>
             </div>
             <!-- Contenido (cuerpo) -->
-            <form method="POST" action="">
+            <form method="POST" id="formulario_compra" name="formulario_compra" action="">
               <div class="row">
                 <div class="col-12">
                   <div class="card">
@@ -197,7 +197,7 @@
                               </div>
                               <div class="col-md-3">
                                 <br>
-                                <a class="btn btn-primary" onclick="agregar_producto()">Agregar</a> 
+                                <a class="btn btn-primary" onclick="agregar_producto()" style="color: white;">Agregar</a> 
                               </div>
                             </div>
                             
@@ -258,13 +258,15 @@
             var elem = ingredientes.split("*");
             var elem1 = unidad.split("*");
             if ($('#lista tr#fil'+elem[0]).find('td').eq(0).html()==null) { 
-              $('#lista').append('<tr id=fil'+elem[0]+'><input type="hidden" name="producto[]" value="'+elem[0]+'" ><td>'+elem[1]+'</td><td><input type="hidden"   name="unidad[]" id="unidad'+elem[0]+'" value="'+elem1[0]+'" >'+elem1[1]+'</td><td><input type="text" maxlength="8" class="solo_numero" onkeyup="obtener_importe('+elem[0]+')" name="cantidad[]" required id="cantidad'+elem[0]+'" maxlength="8" value="1" ></td><td><input type="text" class="solo_precio" required onkeyup="obtener_importe('+elem[0]+')" onchange="modelo_precio('+elem[0]+')" name="precio[]" id="precio'+elem[0]+'" value="" ></td><td><input type="text" style="border: 0;" reandoly="reandoly" name="importe[]"  id="importe'+elem[0]+'" value="" ></td><td><center><a onclick="eliminar('+elem[0]+')" class="btn btn-danger"><i class="icon-trash"></i></a></center></td></tr>');
+              $('#lista').append('<tr id=fil'+elem[0]+'><input type="hidden" name="producto[]" value="'+elem[0]+'" ><td>'+elem[1]+'</td><td><input type="hidden"   name="unidad[]" id="unidad'+elem[0]+'" value="'+elem1[0]+'" >'+elem1[1]+'</td><td><input type="text" maxlength="8" class="solo_numero" onkeyup="obtener_importe('+elem[0]+')" name="cantidad[]" required id="cantidad'+elem[0]+'"  onkeypress="return soloNumeros(event)" value="1" ></td><td><input type="text" class="solo_precio" required onkeyup="obtener_importe('+elem[0]+')" onchange="modelo_precio('+elem[0]+')" name="precio[]" onkeypress="return soloprecio(event)" id="precio'+elem[0]+'" value="" ></td><td><input type="text" style="border: 0;" reandoly="reandoly" name="importe[]"  id="importe'+elem[0]+'" value="" ></td><td><center><a onclick="eliminar('+elem[0]+')" class="btn btn-danger" style="color:white;"><i class="icon-trash"></i></a></center></td></tr>');
               $('#unidad_medida').val('').trigger('change');
             }else{
               alert('El Ingrediente ya a sido seleccionado');
             }
           }
         }
+
+       
 
         function modelo_precio(id){
 
@@ -285,9 +287,16 @@
           $("#fil" + id ).remove();
         }
 
-        $('.solo_numero').on('input', function () { 
-          this.value = this.value.replace(/[^0-9]/g,'');
-        });
+        function soloNumeros(e){
+          var key = window.Event ? e.which : e.keyCode
+          return (key >= 48 && key <= 57  )
+        }
+
+        function soloprecio(e){
+          var key = window.Event ? e.which : e.keyCode
+          return (key >= 48 && key <= 57 || key ==46)
+        }
+
         $('.solo_precio').on('input', function () { 
           this.value = this.value.replace(/[^0-9.]/g,'');
         });

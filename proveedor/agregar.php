@@ -59,7 +59,7 @@
         }
         include '../permisos.php';//modulos del navbar lateral
 
-        $data = array('titulo_descripcion' => 'Agregar Usuario' );
+        $data = array('titulo_descripcion' => 'Agregar Proveedor' );
         if($_COOKIE['imagen']==""){
           $ver="icono_perfil.png";
         }else{
@@ -148,86 +148,85 @@
                   background-position: center;
                 }
               </style>
-              <div class="row">
-                <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
-                  <div class="row">
-                   <div class="col-lg-4 col-xlg-3 col-md-5">
-                    <div class="card">
-                      <div class="card-body">
-                        <center class="m-t-30"> 
-                          <div  class="avatar-upload">
-                            <div class="avatar-edit">
-                              <input type="file" name="fileToUpload" id="imageUpload" accept=".png, .jpg, .jpeg">
-                              <label for="imageUpload"></label>
-                            </div>
-                            <div class="avatar-preview">
-                              <img  id="imagePreview" style="background-image: url(<?php echo $url_carpeta."librerias/assets/images/foto_perfil/defecto_imagen.png" ?>);"/>
-                            </div> 
-                          </div>  
-                        </center>
-                      </div>
 
+              <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
+                <div class="row">
+                 <div class="col-lg-4 col-xlg-3 col-md-5">
+                  <div class="card">
+                    <div class="card-body">
+                      <center class="m-t-30"> 
+                        <div  class="avatar-upload">
+                          <div class="avatar-edit">
+                            <input type="file" name="fileToUpload" required="" id="imageUpload" accept=".png, .jpg, .jpeg">
+                            <label for="imageUpload"></label>
+                          </div>
+                          <div class="avatar-preview">
+                            <img  id="imagePreview" style="background-image: url(<?php echo $url_carpeta."librerias/assets/images/foto_perfil/defecto_imagen.png" ?>);"/>
+                          </div> 
+                        </div>  
+                      </center>
                     </div>
+
                   </div>
-                  <!-- Column -->
-                  <!-- Column -->
-                  <div class="col-lg-8 col-xlg-9 col-md-7">
-                    <div class="card">
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs profile-tab" role="tablist"> 
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
-                      </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <!--second tab-->
-                        <div class="tab-pane active" id="profile" role="tabpanel">
-                          <div class="card-body">
-                           <form action="#">
-                            <div class="form-body">
-                              <h3 class="card-title">PROVEEDOR</h3>
-                              <hr>
-                              <div class="row p-t-0">
-                                <div class="col-md-6">
-                                  <label for="validationDefault01">NOMBRES</label>
-                                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="" required>
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="apellido1">APELLIDO PATERNO</label>
-                                  <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="" required>
-                                </div>
-                                <!--/span-->
-                              </div>
-                              <div class="row p-t-0">
-                               <div class="col-md-6">
-                                <label for="apellido2">APELLIDO MATERNO</label>
-                                <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="" required>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                  <div class="card">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs profile-tab" role="tablist"> 
+                      <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <!--second tab-->
+                      <div class="tab-pane active" id="profile" role="tabpanel">
+                        <div class="card-body">
+                         <form action="#">
+                          <div class="form-body">
+                            <h3 class="card-title">PROVEEDOR</h3>
+                            <hr>
+                            <div class="row p-t-0">
+                              <div class="col-md-6">
+                                <label for="validationDefault01">NOMBRES</label>
+                                <input type="text" class="form-control mb-3 solo_letras" onchange="borrar_espacios('nombre')" id="nombre" name="nombre" placeholder="Nombre" value="" required>
                               </div>
                               <div class="col-md-6">
-                                <label for="direccion">DIRECCIÓN</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" value="" required>
+                                <label for="apellido1">APELLIDO PATERNO</label>
+                                <input type="text" class="form-control mb-3 solo_letras" onchange="borrar_espacios('apellido1')" id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="" required>
                               </div>
                               <!--/span-->
                             </div>
-                            <!--/row-->
                             <div class="row p-t-0">
                              <div class="col-md-6">
-                              <label for="telefono">TELEFONO</label>
-                              <input type="text" class="form-control" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="" required>
+                              <label for="apellido2">APELLIDO MATERNO</label>
+                              <input type="text" class="form-control mb-3 solo_letras" onchange="borrar_espacios('apellido2')" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="" required>
                             </div>
                             <div class="col-md-6">
-                              <label for="email">EMAIL</label>
-                              <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="" required>
+                              <label for="direccion">DIRECCIÓN</label>
+                              <input type="text" class="form-control mb-3 solo_direccion" id="direccion" onchange="borrar_espacios('direccion')" name="direccion" placeholder="Direccion" value="" required>
                             </div>
+                            <!--/span-->
                           </div>
- 
-                          <!--/span-->
+                          <!--/row-->
+                          <div class="row p-t-0">
+                           <div class="col-md-6">
+                            <label for="telefono">TELEFONO</label>
+                            <input type="text" class="form-control mb-3 solo_numero" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="" required>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="email">EMAIL</label>
+                            <input type="text" class="form-control mb-3" onchange="validar_correo()" id="email" name="email" placeholder="Email" value="" required>
+                          </div>
                         </div>
-                        <!--/row-->
+
+                        <!--/span-->
                       </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                        <a   href="index.php" class="btn btn-inverse">Cancel</a>
-                      </div>
+                      <!--/row-->
+                    </div>
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                      <a   href="index.php" class="btn btn-inverse">Cancel</a>
                     </div>
                   </div>
                 </div>
@@ -235,15 +234,35 @@
             </div>
           </div>
         </form>
-      </div>
 
 
-      <?php include "../footer.php"; ?>   
-      <?php include "../includes/js.php"; ?>
-      <script type="text/javascript">
-       
-     </script>
-     <script type="text/javascript"> 
+
+        <?php include "../footer.php"; ?>   
+        <?php include "../includes/js.php"; ?>
+        <script type="text/javascript">
+          $('.solo_numero').on('input', function () { 
+            this.value = this.value.replace(/[^0-9]/g,'');
+          });
+          $('.solo_direccion').on('input', function () { 
+            this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+          $('.solo_letras').on('input', function () { 
+            this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+          function borrar_espacios(name){
+            cadena = $('#'+name).val();
+            $('#'+name).val($.trim(cadena));
+          }
+          function validar_correo(){
+            correo = $('#email').val();
+            emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+        if (!emailRegex.test(correo)) {
+          $('#email').val('');   
+        } 
+      }
+    </script>
+    <script type="text/javascript"> 
       function readURL(input) {
         var  variable;
         if (input.files && input.files[0]) {
@@ -251,8 +270,8 @@
           reader.onload = function(e) { 
             $('#imagePreview').css('background-image', 'url('+e.target.result +')'); 
             $('#imagePreview').attr('src', e.target.result);
-            $(".foto_perfilupdate").attr('src', e.target.result);
-            $("#foto_perfilupdate").attr('src', e.target.result);
+            //$(".foto_perfilupdate").attr('src', e.target.result);
+            //$("#foto_perfilupdate").attr('src', e.target.result);
             $('#imagePreview').hide();
             $('#imagePreview').fadeIn(650); 
 
@@ -263,9 +282,9 @@
       $("#imageUpload").change(function() {
        readURL(this);  
      });
- 
-    </script>
 
-  </body>
+   </script>
 
-  </html>
+ </body>
+
+ </html>

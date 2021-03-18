@@ -39,7 +39,7 @@ foreach ($usuario['Detalles'] as $key => $value) { if ($value['usuario']==$_POST
     $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/empresa/'.$value['id_empresa'],
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/empresa/'.$value['id_empresa'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -58,6 +58,7 @@ foreach ($usuario['Detalles'] as $key => $value) { if ($value['usuario']==$_POST
           curl_close($curl);
           $empresa = json_decode($response, true);
           setcookie('imagen_empresa_admin',$empresa['Detalles']['imagen'],time()+604800,'/');
+          
     $valida=1;
 }
     # code...

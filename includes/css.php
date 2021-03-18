@@ -13,7 +13,33 @@
     <link href="<?php echo $url_carpeta;?>librerias/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $url_carpeta;?>librerias/css/pages/form-icheck.css" rel="stylesheet">
     <link href="<?php echo $url_carpeta;?>librerias/assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <style type="text/css">
+        /*.card-no-border .left-sidebar,
+        .card-no-border .sidebar-nav {
+          background:  <?php echo $_COOKIE['barra_color_fondo']; ?> }
 
+          .sidebar-nav {
+              background: <?php echo $_COOKIE['barra_color_fondo']; ?>  
+          }
+        .sidebar-nav ul li a {
+            color: #fff;
+            padding: 8px 35px 8px 15px;
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .has-arrow{
+            color: #fff;
+        }
+        .btn{
+            background:  <?php echo $_COOKIE['barra_color_fondo']; ?>   ;
+            border-color: <?php echo $_COOKIE['barra_color_fondo'];  ?>
+        }
+        .btn:hover{
+            background:  <?php echo $_COOKIE['barra_color_fondo']; ?>   ;
+            border-color: <?php echo $_COOKIE['barra_color_fondo'];  ?>
+        }*/
+    </style>
     <link href="<?php echo $url_carpeta;?>librerias/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"/>
- 
+

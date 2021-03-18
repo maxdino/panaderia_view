@@ -104,7 +104,7 @@
                               <div class="form-group">
                                 <input type="hidden"  name="id" id="id" value="<?php echo $id_perfil; ?>">
                                 <label class="control-label mb-10 text-left">DESCRIPCION DE PERFIL</label>
-                                <input type="text" class="form-control" required="true" name="perfil" id="perfil" autofocus="true" value="<?php echo $descripcion; ?>">
+                                <input type="text" class="form-control solo_letras" required="true" onchange="borrar_espacios('perfil')" name="perfil" id="perfil" autofocus="true" value="<?php echo $descripcion; ?>">
                               </div>  
                               <br>
                               <center><a ><button class="btn btn-primary">Guardar</button></a><a href="index.php"><button class="btn btn-danger" type="button" >Cancelar</button></a></center>                
@@ -122,7 +122,13 @@
             <?php include "../footer.php"; ?>   
             <?php include "../includes/js.php"; ?>
             <script type="text/javascript">
-
+              $('.solo_letras').on('input', function () { 
+                this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+              });
+              function borrar_espacios(name){
+                cadena = $('#'+name).val();
+                $('#'+name).val($.trim(cadena));
+              }
             </script>
           </body>
 

@@ -38,7 +38,7 @@
           $data = json_decode($response, true);
           header('Location:index.php');  
         }else{
-          
+
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
@@ -62,7 +62,7 @@
         }
         include '../permisos.php';//modulos del navbar lateral
 
-        $data = array('titulo_descripcion' => 'Agregar proveedor' );
+        $data = array('titulo_descripcion' => 'Editar proveedor' );
         if($_COOKIE['imagen']==""){
           $ver="icono_perfil.png";
         }else{
@@ -151,7 +151,7 @@
                   background-position: center;
                 }
               </style>
-              <div class="row">
+
                 <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
                   <div class="row">
                    <div class="col-lg-4 col-xlg-3 col-md-5">
@@ -160,95 +160,115 @@
                         <center class="m-t-30"> 
                           <div  class="avatar-upload">
                             <div class="avatar-edit">
-                              <input type="file" name="fileToUpload" id="imageUpload" accept=".png, .jpg, .jpeg">
+                              <input type="file" required="" name="fileToUpload" id="imageUpload" accept=".png, .jpg, .jpeg">
                               <label for="imageUpload"></label>
                             </div>
                             <div class="avatar-preview">
                               <?php if($listar_proveedor['Detalles']['imagen']!=''){ $url_proveedor = $url_carpeta."librerias/imagen/".$listar_proveedor['Detalles']['imagen']; }else{ $url_proveedor =  $url_carpeta."librerias/assets/images/foto_perfil/defecto_imagen.png";
-                              }  ?>
-                              <input type="hidden" name="imagen_valida" value="<?php echo $listar_proveedor['Detalles']['imagen']; ?>">
-                              <img  id="imagePreview" style="background-image: url(<?php echo $url_proveedor ?>);"/>
-                            </div> 
-                          </div>  
-                        </center>
-                      </div>
-
+                            }  ?>
+                            <input type="hidden" name="imagen_valida" value="<?php echo $listar_proveedor['Detalles']['imagen']; ?>">
+                            <img  id="imagePreview" style="background-image: url(<?php echo $url_proveedor ?>);"/>
+                          </div> 
+                        </div>  
+                      </center>
                     </div>
+
                   </div>
-                  <!-- Column -->
-                  <!-- Column -->
-                  <div class="col-lg-8 col-xlg-9 col-md-7">
-                    <div class="card">
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs profile-tab" role="tablist"> 
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
-                      </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <!--second tab-->
-                        <div class="tab-pane active" id="profile" role="tabpanel">
-                          <div class="card-body">
-                           <form action="#">
-                            <div class="form-body">
-                              <h3 class="card-title">PROVEEDOR</h3>
-                              <hr>
-                              <div class="row p-t-0">
-                                <div class="col-md-6">
-                                  <input type="hidden" name="id" value="<?php echo $listar_proveedor['Detalles']['id_proveedor']; ?>">
-                                  <label for="validationDefault01">NOMBRES</label>
-                                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $listar_proveedor['Detalles']['nombres']; ?>" required>
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="apellido1">APELLIDO PATERNO</label>
-                                  <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="Apellido Paterno" value="<?php echo $listar_proveedor['Detalles']['apellido1']; ?>" required>
-                                </div>
-                                <!--/span-->
-                              </div>
-                              <div class="row p-t-0">
-                               <div class="col-md-6">
-                                <label for="apellido2">APELLIDO MATERNO</label>
-                                <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="<?php echo $listar_proveedor['Detalles']['apellido2']; ?>" required>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                  <div class="card">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs profile-tab" role="tablist"> 
+                      <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <!--second tab-->
+                      <div class="tab-pane active" id="profile" role="tabpanel">
+                        <div class="card-body">
+                         <form action="#">
+                          <div class="form-body">
+                            <h3 class="card-title">PROVEEDOR</h3>
+                            <hr>
+                            <div class="row p-t-0">
+                              <div class="col-md-6">
+                                <input type="hidden" name="id" value="<?php echo $listar_proveedor['Detalles']['id_proveedor']; ?>">
+                                <label for="validationDefault01">NOMBRES</label>
+                                <input type="text" class="form-control solo_letras mb-3" onchange="borrar_espacios('nombre')" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $listar_proveedor['Detalles']['nombres']; ?>" required>
                               </div>
                               <div class="col-md-6">
-                                <label for="direccion">DIRECCIÓN</label>
-                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" value="<?php echo $listar_proveedor['Detalles']['direccion']; ?>" required>
+                                <label for="apellido1">APELLIDO PATERNO</label>
+                                <input type="text" class="form-control solo_letras mb-3" id="apellido1" onchange="borrar_espacios('apellido1')" name="apellido1" placeholder="Apellido Paterno" value="<?php echo $listar_proveedor['Detalles']['apellido1']; ?>" required>
                               </div>
                               <!--/span-->
                             </div>
-                            <!--/row-->
                             <div class="row p-t-0">
                              <div class="col-md-6">
-                              <label for="telefono">TELEFONO</label>
-                              <input type="text" class="form-control" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="<?php echo $listar_proveedor['Detalles']['telefono']; ?>" required>
+                              <label for="apellido2">APELLIDO MATERNO</label>
+                              <input type="text" class="form-control solo_letras mb-3" onchange="borrar_espacios('apellido2')" id="apellido2" name="apellido2" placeholder="Apellido Materno" value="<?php echo $listar_proveedor['Detalles']['apellido2']; ?>" required>
                             </div>
                             <div class="col-md-6">
-                              <label for="email">EMAIL</label>
-                              <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $listar_proveedor['Detalles']['email']; ?>" required>
+                              <label for="direccion">DIRECCIÓN</label>
+                              <input type="text" class="form-control solo_direccion mb-3" onchange="borrar_espacios('direccion')" id="direccion" name="direccion" placeholder="Direccion" value="<?php echo $listar_proveedor['Detalles']['direccion']; ?>" required>
                             </div>
+                            <!--/span-->
                           </div>
- 
-                          <!--/span-->
+                          <!--/row-->
+                          <div class="row p-t-0">
+                           <div class="col-md-6">
+                            <label for="telefono">TELEFONO</label>
+                            <input type="text" class="form-control solo_numero  mb-3" id="telefono" maxlength="9"  name="telefono" placeholder="Telefono" value="<?php echo $listar_proveedor['Detalles']['telefono']; ?>" required>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="email">EMAIL</label>
+                            <input type="text" class="form-control mb-3" id="email" onchange="validar_correo()" name="email" placeholder="Email" value="<?php echo $listar_proveedor['Detalles']['email']; ?>" required>
+                          </div>
                         </div>
-                        <!--/row-->
+
+                        <!--/span-->
                       </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                        <a   href="index.php" class="btn btn-inverse">Cancel</a>
-                      </div>
+                      <!--/row-->
+                    </div>
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                      <a   href="index.php" class="btn btn-inverse">Cancel</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-      </div>
+      </form>
+   
 
 
-      <?php include "../footer.php"; ?>   
-      <?php include "../includes/js.php"; ?>
- 
-     <script type="text/javascript"> 
+    <?php include "../footer.php"; ?>   
+    <?php include "../includes/js.php"; ?>
+
+    <script type="text/javascript"> 
+      $('.solo_numero').on('input', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+      });
+      $('.solo_direccion').on('input', function () { 
+        this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+      });
+      $('.solo_letras').on('input', function () { 
+        this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+      });
+      function borrar_espacios(name){
+        cadena = $('#'+name).val();
+        $('#'+name).val($.trim(cadena));
+      }
+      function validar_correo(){
+        correo = $('#email').val();
+        emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+        if (!emailRegex.test(correo)) {
+          $('#email').val('');   
+        } 
+      }
       function readURL(input) {
         var  variable;
         if (input.files && input.files[0]) {
@@ -269,8 +289,8 @@
        readURL(this);  
      });
       
-    </script>
+   </script>
 
-  </body>
+ </body>
 
-  </html>
+ </html>

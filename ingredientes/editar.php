@@ -2,7 +2,7 @@
         if($_SERVER["REQUEST_METHOD"]=="POST"){
           $curl = curl_init();
            curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/ingredientes/'.$_POST['id'],
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/ingredientes/'.$_POST['id'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -118,14 +118,16 @@
                         <div class="panel-body">
                           <div class="form-wrap">
                             <form method="POST" action="">
-                              <div class="form-group">
+                              <div class="row p-t-0">
+                              <div class="col-md-6 mb-3">
                                 <input type="hidden" name="id" id="id" value="<?php echo $ingredientes['Detalles']['id_ingredientes']; ?>">
                                 <label class="control-label mb-10 text-left">INGREDIENTES</label>
-                                <input type="text" class="form-control" required="true" name="ingredientes" id="ingredientes" autofocus="true" value="<?php echo $ingredientes['Detalles']['ingredientes']; ?>" required="">
+                                <input type="text" class="form-control solo_letras" onchange="borrar_espacios('ingredientes')" required="true" name="ingredientes" id="ingredientes" autofocus="true" value="<?php echo $ingredientes['Detalles']['ingredientes']; ?>" required="">
                               </div> 
-                              <div class="form-group">
+                              <div class="col-md-6 mb-3">
                                 <label class="control-label mb-10 text-left">CANTIDAD</label>
-                                <input type="text" class="form-control" required="true" name="cantidad" id="cantidad" autofocus="true" value="<?php echo $ingredientes['Detalles']['cantidad']; ?>" required="">
+                                <input type="text" class="form-control solo_numero" required="true" maxlength="4" name="cantidad" id="cantidad" autofocus="true" value="<?php echo $ingredientes['Detalles']['cantidad']; ?>" required="">
+                              </div>
                               </div>
                               <div class="form-group">
                                 <label for="unidad_medida">UNIDAD MEDIDA</label>
@@ -157,6 +159,23 @@
             <?php include "../footer.php"; ?>   
             <?php include "../includes/js.php"; ?>
             <script type="text/javascript">
+              $('.solo_precio').on('input', function () { 
+            this.value = this.value.replace(/[^0-9.]/g,'');
+          });
+           $('.solo_numero').on('input', function () { 
+            this.value = this.value.replace(/[^0-9]/g,'');
+          });
+           $('.solo_letras').on('input', function () { 
+            this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+           function borrar_espacios(name){
+            cadena = $('#'+name).val();
+            $('#'+name).val($.trim(cadena));
+          }
+          function formato_numero(name){
+            formato = $('#'+name).val();
+            $('#'+name).val(parseFloat(formato).toFixed(2));
+          }
               $(function() {
               $('#unidad_medida').select2();
             });

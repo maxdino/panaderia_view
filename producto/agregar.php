@@ -166,94 +166,93 @@
                   background-position: center;
                 }
               </style>
-              <div class="row">
-                <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
-                  <div class="row">
-                   <div class="col-lg-4 col-xlg-3 col-md-5">
-                    <div class="card">
-                      <div class="card-body">
-                        <center class="m-t-30"> 
-                          <div  class="avatar-upload">
-                            <div class="avatar-edit">
-                              <input type="file" required="" name="fileToUpload" id="imageUpload" accept="image/*">
-                              <label for="imageUpload"></label>
-                            </div>
-                            <div class="avatar-preview">
-                              <img  id="imagePreview" style="background-image: url(<?php echo $url_carpeta."librerias/assets/images/foto_perfil/defecto_imagen.png" ?>);"/>
-                            </div> 
-                            <br><input type="hidden"  name="id" id="id">
-                            <div class="row form-group has-success">
-                              <label class="form-control-label" for="success">PRODUCTO</label>
-                              <input type="text" required="" class="form-control form-control-success" id="nombre" name="nombre">
-                            </div> 
-                          </div>  
-                        </center>
-                      </div>
 
+              <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
+                <div class="row">
+                 <div class="col-lg-4 col-xlg-3 col-md-5">
+                  <div class="card">
+                    <div class="card-body">
+                      <center class="m-t-30"> 
+                        <div  class="avatar-upload">
+                          <div class="avatar-edit">
+                            <input type="file" required="" name="fileToUpload" id="imageUpload" accept="image/*">
+                            <label for="imageUpload"></label>
+                          </div>
+                          <div class="avatar-preview">
+                            <img  id="imagePreview" style="background-image: url(<?php echo $url_carpeta."librerias/assets/images/foto_perfil/defecto_imagen.png" ?>);"/>
+                          </div> 
+                          <br><input type="hidden"  name="id" id="id">
+                          <div class="row form-group has-success">
+                            <label class="form-control-label" for="success">PRODUCTO</label>
+                            <input type="text" required="" class="form-control form-control-success solo_letras" onchange="borrar_espacios('nombre')" id="nombre" name="nombre">
+                          </div> 
+                        </div>  
+                      </center>
                     </div>
+
                   </div>
-                  <!-- Column -->
-                  <!-- Column -->
-                  <div class="col-lg-8 col-xlg-9 col-md-7">
-                    <div class="card">
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs profile-tab" role="tablist"> 
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
-                      </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <!--second tab-->
-                        <div class="tab-pane active" id="profile" role="tabpanel">
-                          <div class="card-body">
-                           <form action="#">
-                            <div class="form-body">
-                              <h3 class="card-title">PRODUCTO</h3>
-                              <hr>
-                              <div class="row p-t-0">
-                                <div class="col-md-6">
-                                  <label for="cantidad">CANTIDAD</label>
-                                  <input type="text" class="form-control solo_numero" maxlength="4" id="cantidad" name="cantidad" placeholder="cantidad" value="" required>
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="direccion">UNIDAD MEDIDA</label>
-                                  <?php if ($unidad_medida['Status']=='200') { ?>
-                                    <select class="select2  " name="unidad_medida" id="unidad_medida" style="width: 100%; height:36px;">
-                                      <option></option>
-                                      <?php  foreach ($unidad_medida["Detalles"] as $key => $value) { if ($value['id_empresa']==$_COOKIE['id_empresa']) { 
-                                        echo "<option value='".$value["id_unidad_medida"]."'>".$value["unidad_medida"]."</option>";
-                                      } } ?>
-                                    </select> 
-                                  <?php } ?>
-                                </div>
-                                <!--/span-->
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                  <div class="card">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs profile-tab" role="tablist"> 
+                      <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Registro</a> </li> 
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <!--second tab-->
+                      <div class="tab-pane active" id="profile" role="tabpanel">
+                        <div class="card-body">
+                         <form action="#">
+                          <div class="form-body">
+                            <h3 class="card-title">PRODUCTO</h3>
+                            <hr>
+                            <div class="row p-t-0">
+                              <div class="col-md-6 mb-3">
+                                <label for="cantidad">CANTIDAD</label>
+                                <input type="text" class="form-control solo_numero" maxlength="4" id="cantidad" name="cantidad" placeholder="cantidad" value="" required>
                               </div>
-                              <div class="row p-t-0">
-                               <div class="col-md-6">
-                                <label for="precio">PRECIO</label>
-                                <input type="text" class="form-control solo_precio" id="precio" name="precio" placeholder="precio" value="" required>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="direccion">CATEGORIA</label>
-                                <?php if ($categoria['Status']=='200') { ?>
-                                  <select class="select2  " name="categoria" id="categoria" style="width: 100%; height:36px;">
+                              <div class="col-md-6 mb-3">
+                                <label for="direccion">UNIDAD MEDIDA</label>
+                                <?php if ($unidad_medida['Status']=='200') { ?>
+                                  <select class="select2  " name="unidad_medida" id="unidad_medida" style="width: 100%; height:36px;">
                                     <option></option>
-                                    <?php  foreach ($categoria["Detalles"] as $key => $value) { if ($value['id_empresa']==$_COOKIE['id_empresa']) { 
-                                      echo "<option value='".$value["id_categoria"]."'>".$value["categoria"]."</option>";
+                                    <?php  foreach ($unidad_medida["Detalles"] as $key => $value) { if ($value['id_empresa']==$_COOKIE['id_empresa']) { 
+                                      echo "<option value='".$value["id_unidad_medida"]."'>".$value["unidad_medida"]."</option>";
                                     } } ?>
                                   </select> 
                                 <?php } ?>
                               </div>
                               <!--/span-->
                             </div>
-                            <!--/row-->
+                            <div class="row p-t-0">
+                             <div class="col-md-6 mb-3">
+                              <label for="precio">PRECIO</label>
+                              <input type="text" class="form-control solo_precio" onchange="modelo_precio()" id="precio" name="precio" placeholder="precio" value="" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                              <label for="direccion">CATEGORIA</label>
+                              <?php if ($categoria['Status']=='200') { ?>
+                                <select class="select2  " name="categoria" id="categoria" style="width: 100%; height:36px;">
+                                  <option></option>
+                                  <?php  foreach ($categoria["Detalles"] as $key => $value) { if ($value['id_empresa']==$_COOKIE['id_empresa']) { 
+                                    echo "<option value='".$value["id_categoria"]."'>".$value["categoria"]."</option>";
+                                  } } ?>
+                                </select> 
+                              <?php } ?>
+                            </div>
                             <!--/span-->
                           </div>
                           <!--/row-->
+                          <!--/span-->
                         </div>
-                        <div class="form-actions">
-                          <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                          <a   href="index.php" class="btn btn-inverse">Cancel</a>
-                        </div>
+                        <!--/row-->
+                      </div>
+                      <div class="form-actions">
+                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                        <a   href="index.php" class="btn btn-inverse">Cancel</a>
                       </div>
                     </div>
                   </div>
@@ -261,49 +260,58 @@
               </div>
             </div>
           </form>
-        </div>
 
+          <?php include "../footer.php"; ?>   
+          <?php include "../includes/js.php"; ?>
+          <script type="text/javascript">
+           $(function(){
+            $('#categoria').select2();
+            $('#unidad_medida').select2();
+          })
+        </script>
+        <script type="text/javascript"> 
+          function readURL(input) {
+            var  variable;
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) { 
+                $('#imagePreview').css('background-image', 'url('+e.target.result +')'); 
+                $('#imagePreview').attr('src', e.target.result);
+                $(".foto_perfilupdate").attr('src', e.target.result);
+                $("#foto_perfilupdate").attr('src', e.target.result);
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650); 
 
-        <?php include "../footer.php"; ?>   
-        <?php include "../includes/js.php"; ?>
-        <script type="text/javascript">
-         $(function(){
-          $('#categoria').select2();
-          $('#unidad_medida').select2();
-        })
-      </script>
-      <script type="text/javascript"> 
-        function readURL(input) {
-          var  variable;
-          if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) { 
-              $('#imagePreview').css('background-image', 'url('+e.target.result +')'); 
-              $('#imagePreview').attr('src', e.target.result);
-              $(".foto_perfilupdate").attr('src', e.target.result);
-              $("#foto_perfilupdate").attr('src', e.target.result);
-              $('#imagePreview').hide();
-              $('#imagePreview').fadeIn(650); 
-
-            }                         
-            reader.readAsDataURL(input.files[0]); 
+              }                         
+              reader.readAsDataURL(input.files[0]); 
+            }
           }
-        }
-        $("#imageUpload").change(function() {
-         readURL(this);  
-       });
+          $("#imageUpload").change(function() {
+           readURL(this);  
+         });
 
-        $('.solo_numero').on('input', function () { 
-          this.value = this.value.replace(/[^0-9]/g,'');
-        });
-        $('.solo_precio').on('input', function () { 
-          this.value = this.value.replace(/[^0-9.]/g,'');
-        });
-        $('.solo_serie').on('input', function () { 
-          this.value = this.value.replace(/[^0-9-]/g,'');
-        });
-      </script>
+          $('.solo_numero').on('input', function () { 
+            this.value = this.value.replace(/[^0-9]/g,'');
+          });
+          $('.solo_precio').on('input', function () { 
+            this.value = this.value.replace(/[^0-9.]/g,'');
+          });
+          $('.solo_serie').on('input', function () { 
+            this.value = this.value.replace(/[^0-9-]/g,'');
+          });
+          $('.solo_letras').on('input', function () { 
+            this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+          function modelo_precio(){
+            precio = parseFloat($('#precio').val());
+            $('#precio').val(precio.toFixed(2));
+          }
+          function borrar_espacios(name){
+            cadena = $('#'+name).val();
+            $('#'+name).val($.trim(cadena));
+          } 
+        </script>
 
-    </body>
+      </body>
 
-    </html>
+      </html>

@@ -14,6 +14,7 @@
     <!-- User style -->
     <link rel="stylesheet" href="../librerias/assets1/css/custom.css">
 
-
+    <link href="../librerias/alertas/css/sweetalert.css" rel="stylesheet">
     <!-- Modernizr JS -->
     <script src="../librerias/assets1/js/vendor/modernizr-2.8.3.min.js"></script>
+ 

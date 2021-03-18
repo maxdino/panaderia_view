@@ -186,7 +186,7 @@
                   background-position: center;
                 }
               </style>
-              <div class="row">
+ 
                 <form method="post" id="subirimagen" enctype="multipart/form-data" action="">
                   <div class="row">
                    <div class="col-lg-4 col-xlg-3 col-md-5">
@@ -212,7 +212,7 @@
                             <br><input type="hidden"  name="id" id="id" value="<?php echo $producto['Detalles']['idProducto'] ?>">
                             <div class="row form-group has-success">
                               <label class="form-control-label" for="success">PRODUCTO</label>
-                              <input type="text" class="form-control form-control-success" id="nombre" name="nombre" value="<?php echo $producto['Detalles']['descripcion']; ?>">
+                              <input type="text" class="form-control form-control-success solo_letras" onchange="borrar_espacios('nombre')" id="nombre" name="nombre" value="<?php echo $producto['Detalles']['descripcion']; ?>">
                             </div> 
                           </div>  
                         </center>
@@ -261,7 +261,7 @@
                             <div class="row p-t-0">
                              <div class="col-md-6">
                               <label for="precio">PRECIO</label>
-                              <input type="text" class="form-control solo_precio" id="precio" name="precio" placeholder="precio" value="<?php echo $producto['Detalles']['precio']; ?>" required>
+                              <input type="text" class="form-control solo_precio" id="precio" onchange="modelo_precio()" name="precio" placeholder="precio" value="<?php echo $producto['Detalles']['precio']; ?>" required>
                             </div>
                             <div class="col-md-6">
                               <label for="direccion">CATEGORIA</label>
@@ -293,9 +293,9 @@
             </div>
           </div>
         </div>
-      </div>
+ 
     </form>
-  </div>
+ 
 
 
   <?php include "../footer.php"; ?>   
@@ -336,6 +336,18 @@
   $('.solo_serie').on('input', function () { 
     this.value = this.value.replace(/[^0-9-]/g,'');
   });
+  $('.solo_letras').on('input', function () { 
+            this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
+  function modelo_precio(){
+          precio = parseFloat($('#precio').val());
+          $('#precio').val(precio.toFixed(2));
+        }
+
+  function borrar_espacios(name){
+                cadena = $('#'+name).val();
+                $('#'+name).val($.trim(cadena));
+              }      
 </script>
 
 </body>

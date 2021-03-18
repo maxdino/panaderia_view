@@ -99,11 +99,11 @@
                               <div class="form-group">
                                 <input type="hidden"  name="id" id="id" value="<?php echo $unidad_medida['Detalles']['id_unidad_medida']; ?>">
                                 <label class="control-label mb-10 text-left">DESCRIPCION DE UNIDAD MEDIDA</label>
-                                <input type="text" class="form-control" required="true" name="unidad_medida" id="unidad_medida" autofocus="true" value="<?php echo $unidad_medida['Detalles']['unidad_medida']; ?>">
+                                <input type="text" class="form-control solo_letras_numero" onchange="borrar_espacios('unidad_medida')" required="true" name="unidad_medida" id="unidad_medida" autofocus="true" value="<?php echo $unidad_medida['Detalles']['unidad_medida']; ?>">
                               </div>  
                               <div class="form-group">
                                 <label class="control-label mb-10 text-left">CANTIDAD DE UNIDAD MEDIDA</label>
-                                <input type="text" class="form-control" required="true" name="cantidad" id="cantidad" autofocus="true" value="<?php echo $unidad_medida['Detalles']['cantidad']; ?>" required="">
+                                <input type="text" class="form-control solo_numero" maxlength="3" required="true" name="cantidad" id="cantidad" autofocus="true" value="<?php echo $unidad_medida['Detalles']['cantidad']; ?>" required="">
                               </div>
                               <br>
                               <center><a ><button class="btn btn-primary">Guardar</button></a><a href="index.php"><button class="btn btn-danger" type="button" >Cancelar</button></a></center>                
@@ -121,7 +121,16 @@
             <?php include "../footer.php"; ?>   
             <?php include "../includes/js.php"; ?>
             <script type="text/javascript">
-
+              $('.solo_numero').on('input', function () { 
+                this.value = this.value.replace(/[^0-9.]/g,'');
+              });
+              $('.solo_letras_numero').on('input', function () { 
+                this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9 ]/g,'');
+              });
+              function borrar_espacios(name){
+                cadena = $('#'+name).val();
+                $('#'+name).val($.trim(cadena));
+              }
             </script>
           </body>
 

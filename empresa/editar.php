@@ -18,7 +18,7 @@
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => 'descripcion='.$_POST['nombre'].'&ruc='.$_POST['ruc'].'&direccion='.$_POST['direccion'].'&telefono='.$_POST['telefono'].'&email='.$_POST['email'].'&imagen='.$imagen,
+            CURLOPT_POSTFIELDS => 'descripcion='.$_POST['nombre'].'&ruc='.$_POST['ruc'].'&direccion='.$_POST['direccion'].'&telefono='.$_POST['telefono'].'&email='.$_POST['email'].'&imagen='.$imagen.'&deliveri=1&tiempo=',
             CURLOPT_HTTPHEADER => array(
               'Authorization: Basic YTJhYTA3YWRmaGRmcmV4ZmhnZGZoZGZlcnR0Z2VGQnBJY3ova012SS9MOHRDSkJUanJxa3BNZFFPRGkyOm8yYW8wN29kZmhkZnJleGZoZ2RmaGRmZXJ0dGdlL2g2c0xRRFpPMXpOWXZRYWh5a1o2ZGluZmZsUFZWMg==',
               'Content-Type: application/x-www-form-urlencoded'
@@ -34,7 +34,7 @@
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/panaderia/index.php/empresa/'.$_GET['id'],
+            CURLOPT_URL => 'http://polvazo.informaticapp.com/empresa/'.$_GET['id'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -170,7 +170,7 @@
                           <br><input type="hidden"  name="id" id="id" value="<?php echo $empresa['Detalles']['id_empresa']; ?>">
                           <div class="row form-group has-success">
                             <label class="form-control-label" for="success">EMPRESA</label>
-                            <input type="text" required="" class="form-control form-control-success" id="nombre" name="nombre" value="<?php echo $empresa['Detalles']['descripcion'] ?>">
+                            <input type="text" required="" class="form-control form-control-success solo_letras" onchange="borrar_espacios('nombre')" id="nombre" name="nombre" value="<?php echo $empresa['Detalles']['descripcion'] ?>">
                           </div> 
                         </div>  
                       </center>
@@ -193,16 +193,16 @@
                         <div class="card-body">
                          <form action="#">
                           <div class="form-body">
-                            <h3 class="card-title">PRODUCTO</h3>
+                            <h3 class="card-title">REGISTRO</h3>
                             <hr>
                             <div class="row  ">
                               <div class="col-md-4 mb-3" >
                                 <label for="cantidad">RUC</label>
-                                <input type="text" class="form-control solo_numero" maxlength="11" id="ruc" name="ruc" placeholder="RUC" value="<?php echo $empresa['Detalles']['ruc'] ?>" required>
+                                <input type="text" onkeyup="validar_ruc()" class="form-control solo_numero" maxlength="11" id="ruc" name="ruc" placeholder="RUC" value="<?php echo $empresa['Detalles']['ruc'] ?>" required>
                               </div>
                               <div class="col-md-4 mb-3">
                                 <label for="precio">EMAIL</label>
-                                <input type="text" class="form-control " id="email" name="email" placeholder="email" value="<?php echo $empresa['Detalles']['email'] ?>" required>
+                                <input type="text" class="form-control " onchange="validar_correo()" id="email" name="email" placeholder="email" value="<?php echo $empresa['Detalles']['email'] ?>" required>
                               </div>
                               <div class="col-md-4 mb-3">
                                 <label for="precio">TELEFONO</label>
@@ -213,7 +213,7 @@
                             <div class="row ">
                               <div class="col-md-12 mb-3">
                                 <label for="cantidad">DIRECCIÓN</label>
-                                <input type="text" class="form-control"  id="direccion" name="direccion" placeholder="DIRECCION" value="<?php echo $empresa['Detalles']['direccion'] ?>" required>
+                                <input type="text" class="form-control solo_direccion" onchange="borrar_espacios('direccion')"  id="direccion" name="direccion" placeholder="DIRECCION" value="<?php echo $empresa['Detalles']['direccion'] ?>" required>
                               </div>
                               <!--/span-->
                             </div>
@@ -279,11 +279,41 @@
             $('.solo_precio').on('input', function () { 
               this.value = this.value.replace(/[^0-9.]/g,'');
             });
-            $('.solo_serie').on('input', function () { 
-              this.value = this.value.replace(/[^0-9-]/g,'');
+            $('.solo_letras').on('input', function () { 
+              this.value = this.value.replace(/[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
             });
-          </script>
+            function borrar_espacios(name){
+              cadena = $('#'+name).val();
+              $('#'+name).val($.trim(cadena));
+            }
+            $('.solo_direccion').on('input', function () { 
+            this.value = this.value.replace(/[^0-9a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/g,'');
+          });
 
-        </body>
+            function validar_correo(){
+              correo = $('#email').val();
+              emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+        if (!emailRegex.test(correo)) {
+          $('#email').val('');   
+        } 
+      }
+      function validar_ruc(){
+        valida = $('#ruc').val();
+        if(valida.length==11){
+          $.ajax({
+            type: "GET",
+            url: "https://dniruc.apisperu.com/api/v1/ruc/"+valida+"?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1heC5oaWxhcmlvMzUxQGdtYWlsLmNvbSJ9.mCCS9RsZR7QlO559rdbfSkGwaNZ64uN_OFtz4n3dFJk",
+            success: function(data) {
+             if (!(data.ruc)) {
+              $('#ruc').val('');
+            }  
+          }
+        });
+        }
+      }
+    </script>
 
-        </html>
+  </body>
+
+  </html>
