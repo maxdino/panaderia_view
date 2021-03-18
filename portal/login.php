@@ -146,12 +146,12 @@ if (isset($_COOKIE['MIRKODONI_EMAIL'])) {//para traer datos del cliente
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>PANADERIA Y PASTELERIA  </title>
+  <title>POLVAZO</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Place favicon.ico in the root directory -->
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../librerias/imagen/iconos/logo_polvazo_4.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 

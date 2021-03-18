@@ -32,12 +32,12 @@ if (!$_COOKIE['MIRKODONI_CLIENTE_ID']) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>MIRKODONI</title>
+    <title>POLVAZO</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="../librerias/imagen/iconos/icono_mirkodoni.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../librerias/imagen/iconos/logo_polvazo_4.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
 
@@ -120,7 +120,7 @@ if (!$_COOKIE['MIRKODONI_CLIENTE_ID']) {
                                 <div class="blog__inner">
                                     <div class="blog__thumb">
                                         <a href="index.php?id_empresa=<?php echo $value['id_empresa']; ?>&&nombre_empresa=<?php echo $value['descripcion']; ?>">
-                                            <img style="width: 370px;height: 347px; " src="../librerias/imagen/<?php echo $value['imagen'] ?>" alt="blog images">
+                                            <img style="width: 300px;height: 250px; " src="../librerias/imagen/<?php echo $value['imagen'] ?>" alt="blog images">
                                         </a>
                                         
                                     </div>

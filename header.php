@@ -9,8 +9,8 @@
             <meta name="author" content="">
             <?php $url_carpeta = 'http://localhost/Panaderia_view/';  ?>
             <!-- Favicon icon -->
-            <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $url_carpeta;?>librerias/imagen/iconos/logo_polvazo_5.png">
-            <title>Panaderia y Pasteleria</title>
+            <link rel="icon" type="image/png" sizes="16x16" href="../librerias/imagen/iconos/logo_polvazo_4.png">
+            <title>POLVAZO</title>
             <!-- Bootstrap Core CSS -->
             <?php include "../includes/css.php"; ?>
         </head>
